@@ -1,0 +1,120 @@
+p {
+  font-family: Lato;
+}
+#app {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  background-image: url('https://tophinhanhdep.com/wp-content/uploads/2021/11/Canada-Nature-Wallpapers.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+::ng-deep {
+  @mixin setPaddingAll {
+    @for $size from 0 to 101 {
+      .#{'p-' + $size} {
+        padding: $size + px !important;
+      }
+      .#{'p-x-' + $size} {
+        padding-left: $size + px !important;
+        padding-right: $size + px !important;
+      }
+
+      .#{'p-y-' + $size} {
+        padding-top: $size + px !important;
+        padding-bottom: $size + px !important;
+      }
+
+      .#{'p-h-' + $size} {
+        padding-left: $size + px !important;
+        padding-right: $size + px !important;
+      }
+
+      .#{'p-v-' + $size} {
+        padding-top: $size + px !important;
+        padding-bottom: $size + px !important;
+      }
+
+      .#{'p-r-' + $size} {
+        padding-right: $size + px !important;
+      }
+
+      .#{'p-l-' + $size} {
+        padding-left: $size + px !important;
+      }
+
+      .#{'p-t-' + $size} {
+        padding-top: $size + px !important;
+      }
+
+      .#{'p-b-' + $size} {
+        padding-bottom: $size + px !important;
+      }
+    }
+  }
+
+  @include setPaddingAll;
+  /* #endregion Padding */
+
+  /* #region Margin */
+  @mixin setMarginAll() {
+    @for $size from 0 to 101 {
+      .#{'m-' + $size} {
+        margin: $size + px !important;
+      }
+
+      .#{'m-h-' + $size} {
+        margin-left: $size + px !important;
+        margin-right: $size + px !important;
+      }
+
+      .#{'m-v-' + $size} {
+        margin-top: $size + px !important;
+        margin-bottom: $size + px !important;
+      }
+      .#{'m-x-' + $size} {
+        margin-left: $size + px !important;
+        margin-right: $size + px !important;
+      }
+
+      .#{'m-y-' + $size} {
+        margin-top: $size + px !important;
+        margin-bottom: $size + px !important;
+      }
+
+      .#{'m-r-' + $size} {
+        margin-right: $size + px !important;
+      }
+
+      .#{'m-l-' + $size} {
+        margin-left: $size + px !important;
+      }
+
+      .#{'m-t-' + $size} {
+        margin-top: $size + px !important;
+      }
+
+      .#{'m-b-' + $size} {
+        margin-bottom: $size + px !important;
+      }
+    }
+  }
+
+  @include setMarginAll;
+
+  @mixin setEllipsis() {
+    @for $line from 1 to 10 {
+      .#{'text-ellipsis-' + $line} {
+        display: -webkit-box;
+        -webkit-line-clamp: $line;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+  }
+  @include setEllipsis();
+}
