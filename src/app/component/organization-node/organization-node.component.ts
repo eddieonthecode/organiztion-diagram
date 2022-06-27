@@ -5,7 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './organization-node-1.component.html',
   styleUrls: ['./organization-node-1.component.scss'],
 })
-export class OrganizationNode1Component implements OnInit {
+export class OrganizationNodeComponent implements OnInit {
   @Input() nodeData: any;
   @Input() level: number = 1;
   constructor() {}
@@ -13,7 +13,7 @@ export class OrganizationNode1Component implements OnInit {
   ngOnInit() {}
 
   numberToString(number) {
-    switch (number) {
+    switch (number % 10) {
       case 1:
         return 'one';
       case 2:

@@ -1,5 +1,5 @@
 <div class="d-flex flex-column align-items-center">
-  <div [class]="numberToString(level)" class="organization__node">
+  <div [class]="numberToString(level)" class="organization__node m-x-10">
     <div class="organization__name text-ellipsis-2" [title]="nodeData.name">
       {{ nodeData.name }}
     </div>
@@ -23,7 +23,10 @@
         ></div>
       </div>
       <!-- Số lượng nhánh con -->
-      <div class="organization__amountchild">
+      <div
+        *ngIf="nodeData.children && nodeData.children.length"
+        class="organization__amountchild"
+      >
         {{ nodeData.children ? nodeData.children.length : 0 }}
         <i class="fa-solid fa-network-wired"></i>
       </div>
@@ -40,6 +43,7 @@
       [class.plus]="nodeData.collapse"
       [class.minus]="!nodeData.collapse"
       (click)="nodeData.collapse = !nodeData.collapse"
+      *ngIf="nodeData.children && nodeData.children.length"
     >
       <i *ngIf="nodeData.collapse" class="fa-solid fa-plus"></i>
       <i *ngIf="!nodeData.collapse" class="fa-solid fa-minus"></i>

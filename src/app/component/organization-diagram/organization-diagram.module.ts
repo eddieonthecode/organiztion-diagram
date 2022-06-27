@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrganizationDiagramComponent } from './organization-diagram.component';
-import { OrganizationNode1Module } from '../organization-node-1/organization-node-1.module';
+import { OrganizationNodeModule } from '../organization-node/organization-node.module';
 
 @NgModule({
-  imports: [CommonModule, OrganizationNode1Module],
+  imports: [CommonModule, OrganizationNodeModule],
   declarations: [OrganizationDiagramComponent],
   exports: [OrganizationDiagramComponent],
 })
