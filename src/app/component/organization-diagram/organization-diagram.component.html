@@ -3,7 +3,10 @@
   <div class="organization-diagram position-relative flex-grow-1 m-b-20 m-x-30">
     <div class="organization__control position-absolute"></div>
     <div class="organization position-absolute">
-      <div class="organization__node one">
+      <app-organization-node-1
+        [nodeData]="organizationData"
+      ></app-organization-node-1>
+      <!-- <div class="organization__node one">
         <div
           class="organization__name text-ellipsis-2"
           [title]="organizationData.name"
@@ -50,7 +53,6 @@
           <i *ngIf="organizationData.collapse" class="fa-solid fa-plus"></i>
           <i *ngIf="!organizationData.collapse" class="fa-solid fa-minus"></i>
         </div>
-        <!-- <div *ngIf= class="organization__line-top"></div> -->
         <div
           *ngIf="
             organizationData.children &&
@@ -123,7 +125,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
