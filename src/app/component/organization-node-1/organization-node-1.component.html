@@ -1,106 +1,67 @@
-<div class="organization__node one">
-  <div class="organization__name text-ellipsis-2" [title]="nodeData.name">
-    {{ nodeData.name }}
-  </div>
-  <div class="d-flex justify-content-between m-t-10">
-    <div class="organization__managers">
-      <div
-        *ngIf="nodeData.managers.length == 1"
-        class="organization__manager-single"
-      >
+<div class="d-flex flex-column align-items-center">
+  <div [class]="numberToString(level)" class="organization__node">
+    <div class="organization__name text-ellipsis-2" [title]="nodeData.name">
+      {{ nodeData.name }}
+    </div>
+    <!-- Thông tin người quản lý -->
+    <div class="d-flex justify-content-between m-t-10">
+      <div class="organization__managers">
         <div
-          class="organization__manager-name"
-          [title]="nodeData.managers[0].name"
+          *ngIf="nodeData.managers.length == 1"
+          class="organization__manager-single"
         >
-          {{ nodeData.managers[0].name }}
+          <div
+            class="organization__manager-name"
+            [title]="nodeData.managers[0].name"
+          >
+            {{ nodeData.managers[0].name }}
+          </div>
         </div>
+        <div
+          *ngIf="nodeData.managers.length > 1"
+          class="organization__manager-multi"
+        ></div>
       </div>
-      <div
-        *ngIf="nodeData.managers.length > 1"
-        class="organization__manager-multi"
-      ></div>
+      <!-- Số lượng nhánh con -->
+      <div class="organization__amountchild">
+        {{ nodeData.children ? nodeData.children.length : 0 }}
+        <i class="fa-solid fa-network-wired"></i>
+      </div>
     </div>
-    <div class="organization__amountchild">
-      {{ nodeData.children ? nodeData.children.length : 0 }}
-      <i class="fa-solid fa-network-wired"></i>
+    <!-- Nút extend/collapse nhánh -->
+    <div
+      class="
+        organization__togglechild
+        position-absolute
+        d-flex
+        align-items-center
+        justify-content-center
+      "
+      [class.plus]="nodeData.collapse"
+      [class.minus]="!nodeData.collapse"
+      (click)="nodeData.collapse = !nodeData.collapse"
+    >
+      <i *ngIf="nodeData.collapse" class="fa-solid fa-plus"></i>
+      <i *ngIf="!nodeData.collapse" class="fa-solid fa-minus"></i>
     </div>
+    <div class="organization__line-top"></div>
+    <div
+      *ngIf="
+        nodeData.children && nodeData.children.length && !nodeData.collapse
+      "
+      class="organization__line-bottom"
+    ></div>
   </div>
-  <div
-    class="
-      organization__togglechild
-      position-absolute
-      d-flex
-      align-items-center
-      justify-content-center
-    "
-    [class.plus]="nodeData.collapse"
-    [class.minus]="!nodeData.collapse"
-    (click)="nodeData.collapse = !nodeData.collapse"
-  >
-    <i *ngIf="nodeData.collapse" class="fa-solid fa-plus"></i>
-    <i *ngIf="!nodeData.collapse" class="fa-solid fa-minus"></i>
-  </div>
-  <div
-    *ngIf="nodeData.children && nodeData.children.length && !nodeData.collapse"
-    class="organization__line-bottom"
-  ></div>
+  <!-- Các nhánh con -->
   <div
     *ngIf="!nodeData.collapse"
-    class="organization__children position-absolute d-flex gutter"
+    class="organization__children position-relative d-flex m-t-40"
   >
-    <div class="col" *ngFor="let child of nodeData.children">
-      <div class="organization__node two">
-        <div class="organization__name text-ellipsis-2" [title]="nodeData.name">
-          {{ child.name }}
-        </div>
-        <div class="d-flex justify-content-between m-t-10">
-          <div class="organization__managers">
-            <div
-              *ngIf="nodeData.managers.length == 1"
-              class="organization__manager-single"
-            >
-              <div
-                class="organization__manager-name"
-                [title]="nodeData.managers[0].name"
-              >
-                {{ child.managers[0].name }}
-              </div>
-            </div>
-            <div
-              *ngIf="nodeData.managers.length > 1"
-              class="organization__manager-multi"
-            ></div>
-          </div>
-          <div
-            *ngIf="child.children && child.children.length > 0"
-            class="organization__amountchild"
-          >
-            {{ child.children ? child.children.length : 0 }}
-            <i class="fa-solid fa-network-wired"></i>
-          </div>
-        </div>
-        <div class="organization__line-top"></div>
-        <div
-          *ngIf="child.children && child.children.length && !child.collapse"
-          class="organization__line-bottom"
-        ></div>
-        <div
-          *ngIf="child.children && child.children.length"
-          class="
-            organization__togglechild
-            position-absolute
-            d-flex
-            align-items-center
-            justify-content-center
-          "
-          [class.plus]="child.collapse"
-          [class.minus]="!child.collapse"
-          (click)="child.collapse = !child.collapse"
-        >
-          <i *ngIf="child.collapse" class="fa-solid fa-plus"></i>
-          <i *ngIf="!child.collapse" class="fa-solid fa-minus"></i>
-        </div>
-      </div>
+    <div *ngFor="let child of nodeData.children">
+      <app-organization-node-1
+        [nodeData]="child"
+        [level]="level + 1"
+      ></app-organization-node-1>
     </div>
   </div>
 </div>

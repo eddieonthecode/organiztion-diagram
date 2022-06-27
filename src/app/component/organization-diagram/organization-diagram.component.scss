@@ -2,7 +2,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #fff;
-  overflow: hidden;
+  overflow: auto;
   .organization {
     left: 50%;
     top: 10px;
@@ -99,14 +99,7 @@
       }
     }
     &__children {
-      top: calc(100% + 40px);
-      left: 50%;
-      transform: translateX(-50%);
-      &.gutter {
-        [class*='col'] {
-          padding: 0 12px;
-        }
-      }
+      padding: 0 12px;
       &::before {
         display: block;
         content: '';
