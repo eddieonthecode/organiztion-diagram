@@ -34,7 +34,7 @@ export class OrganizationNodeComponent implements OnInit {
         return 'eight';
       case 9:
         return 'night';
-      case 10:
+      case 0:
         return 'ten';
     }
   }

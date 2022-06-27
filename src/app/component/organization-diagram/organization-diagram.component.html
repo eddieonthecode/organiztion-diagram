@@ -4,7 +4,21 @@
     (mousedown)="mousedown($event)"
     class="organization-diagram position-relative flex-grow-1 m-b-20 m-x-30"
   >
-    <div class="organization__control position-absolute"></div>
+    <div class="organization__control position-absolute">
+      <div class="organization__zoom">
+        <div class="organization__zoom-slide">
+          <input
+            type="range"
+            min="1"
+            max="100"
+            [(ngModel)]="zoomPercent"
+            class="slider"
+            id="myRange"
+          />
+        </div>
+        <div class="organization__zoom-percent"></div>
+      </div>
+    </div>
     <div
       class="
         organization

@@ -13,6 +13,7 @@ export class OrganizationDiagramComponent implements OnInit {
   isMoving = false;
   startX = 0;
   startY = 0;
+  zoomPercent = 50;
   element: any;
   ngOnInit() {}
 
