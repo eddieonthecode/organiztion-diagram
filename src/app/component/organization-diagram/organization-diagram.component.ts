@@ -7,6 +7,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 })
 export class OrganizationDiagramComponent implements OnInit {
   @ViewChild('draggable', { read: ElementRef }) draggable: ElementRef;
+  @ViewChild('wrapper', { read: ElementRef }) wrapper: ElementRef;
 
   @Input() organizationData: any;
   constructor() {}
@@ -14,6 +15,7 @@ export class OrganizationDiagramComponent implements OnInit {
   startX = 0;
   startY = 0;
   zoomPercent = 50;
+  xPercent = 50;
   element: any;
   ngOnInit() {}
 
@@ -24,9 +26,11 @@ export class OrganizationDiagramComponent implements OnInit {
       if (this.isMoving) {
         this.element.style.cursor = 'all-scroll';
         this.clearSelection();
-        this.element.style.left = e.clientX - this.startX + 'px';
+        this.element.style.left =
+          ((e.clientX - this.startX) * 100) / (this.zoomPercent * 2) + 'px';
         this.element.style.right = 'unset';
-        this.element.style.top = e.clientY - this.startY + 'px';
+        this.element.style.top =
+          ((e.clientY - this.startY) * 100) / (this.zoomPercent * 2) + 'px';
         this.element.style.bottom = 'unset';
       }
     });
@@ -44,25 +48,31 @@ export class OrganizationDiagramComponent implements OnInit {
    */
   mousedown(e) {
     this.isMoving = true;
-    this.startX = e.clientX - parseInt(getComputedStyle(this.element).left);
-    this.startY = e.clientY - parseInt(getComputedStyle(this.element).top);
+    this.startX =
+      e.clientX -
+      (parseInt(getComputedStyle(this.element).left) * 2 * this.zoomPercent) /
+        100;
+    this.startY =
+      e.clientY -
+      (parseInt(getComputedStyle(this.element).top) * 2 * this.zoomPercent) /
+        100;
   }
   mousedownControl(e) {
     e.stopPropagation();
   }
   changePercent(e) {
-    this.zoomPercent = e.target.value;
+    this.zoomPercent = Number(e.target.value);
     this.element.style.zoom = e.target.value * 2 + '%';
   }
   scroll(e) {
     if (e.deltaY < 0) {
       if (this.zoomPercent < 96) {
-        this.zoomPercent += 4;
+        this.zoomPercent = this.zoomPercent + 4;
         this.element.style.zoom = this.zoomPercent * 2 + '%';
       }
     } else {
       if (this.zoomPercent > 4) {
-        this.zoomPercent -= 4;
+        this.zoomPercent = this.zoomPercent - 4;
         this.element.style.zoom = this.zoomPercent * 2 + '%';
       }
     }

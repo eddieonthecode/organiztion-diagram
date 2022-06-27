@@ -76,6 +76,8 @@
         [level]="level + 1"
         [first]="i == 0"
         [last]="i == nodeData.children.length - 1"
+        [siblings]="nodeData.children"
+        [index]="i"
       ></app-organization-node>
     </div>
   </div>
