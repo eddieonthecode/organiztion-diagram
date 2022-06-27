@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-organization-node-1',
-  templateUrl: './organization-node-1.component.html',
-  styleUrls: ['./organization-node-1.component.scss'],
+  selector: 'app-organization-node',
+  templateUrl: './organization-node.component.html',
+  styleUrls: ['./organization-node.component.scss'],
 })
 export class OrganizationNodeComponent implements OnInit {
   @Input() nodeData: any;

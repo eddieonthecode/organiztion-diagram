@@ -62,10 +62,10 @@
     class="organization__children position-relative d-flex m-t-40"
   >
     <div *ngFor="let child of nodeData.children">
-      <app-organization-node-1
+      <app-organization-node
         [nodeData]="child"
         [level]="level + 1"
-      ></app-organization-node-1>
+      ></app-organization-node>
     </div>
   </div>
 </div>
