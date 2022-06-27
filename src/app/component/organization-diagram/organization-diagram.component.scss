@@ -2,11 +2,11 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #fff;
-  overflow: auto;
+  overflow: hidden;
   .organization {
-    transform: scale(0.5);
-    // left: 50%;
-    // top: 10px;
-    // transform: translateX(-50%);
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    zoom: 60%;
   }
 }

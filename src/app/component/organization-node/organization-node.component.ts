@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class OrganizationNodeComponent implements OnInit {
   @Input() nodeData: any;
   @Input() level: number = 1;
+  @Input() first: boolean = false;
+  @Input() last: boolean = false;
   constructor() {}
 
   ngOnInit() {}

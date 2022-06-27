@@ -1,6 +1,9 @@
 <div class="w-100 h-100 d-flex flex-column">
   <h1 style="color: #fff" class="m-x-10 m-y-10">Organization Chart</h1>
-  <div class="organization-diagram position-relative flex-grow-1 m-b-20 m-x-30">
+  <div
+    (mousedown)="mousedown($event)"
+    class="organization-diagram position-relative flex-grow-1 m-b-20 m-x-30"
+  >
     <div class="organization__control position-absolute"></div>
     <div
       class="
@@ -10,6 +13,7 @@
         flex-column
         align-items-center
       "
+      #draggable
     >
       <app-organization-node
         [nodeData]="organizationData"

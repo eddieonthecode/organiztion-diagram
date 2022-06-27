@@ -1,7 +1,4 @@
 .organization {
-  // left: 50%;
-  // top: 10px;
-  // transform: translateX(-50%);
   &__node {
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -94,6 +91,7 @@
     }
   }
   &__children {
+    transition: all 0.3s ease;
     &::before {
       display: block;
       content: '';
@@ -104,6 +102,7 @@
       transform: translateX(-50%);
       width: calc(100% - 200px - 22px);
       height: 1px;
+      // z-index: 10;
     }
   }
   &__line-top {
@@ -123,5 +122,16 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
+  }
+  &__hidden-line {
+    height: 1px;
+    width: 50%;
+    top: -150px;
+    background-color: red;
+    &.first {
+    }
+    &.last {
+      right: 0;
+    }
   }
 }
