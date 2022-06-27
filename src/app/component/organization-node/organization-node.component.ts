@@ -14,9 +14,7 @@ export class OrganizationNodeComponent implements OnInit {
   @Input() index: number;
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.isAbsolute);
-  }
+  ngOnInit() {}
 
   /**
    * Chuyển số level sang class ứng với nó
@@ -58,7 +56,8 @@ export class OrganizationNodeComponent implements OnInit {
       let prevNode = this.siblings[this.index - 1];
       let nextNode = this.siblings[this.index + 1];
       if (
-        (!prevNode.children ||
+        (!prevNode ||
+          !prevNode.children ||
           prevNode.children.length == 0 ||
           prevNode.collapse) &&
         (!nextNode ||

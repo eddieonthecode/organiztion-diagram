@@ -17,6 +17,7 @@
             {{ nodeData.managers[0].name }}
           </div>
         </div>
+        <div>{{ isAbsolute }}</div>
         <div
           *ngIf="nodeData.managers.length > 1"
           class="organization__manager-multi"
@@ -63,6 +64,8 @@
     [style.opacity]="!nodeData.collapse ? 1 : 0"
     class="organization__children position-relative d-flex m-t-40"
   >
+    <!-- [class.position-absolute]="isAbsolute && level != 1"
+    [style.top]="isAbsolute && level != 1 ? '90px' : 'unset'" -->
     <!-- Ẩn đường thừa -->
     <div
       *ngIf="first || last"

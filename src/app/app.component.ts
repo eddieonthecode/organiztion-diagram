@@ -201,6 +201,68 @@ export class AppComponent {
                   'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
               },
             ],
+            children: [
+              {
+                name: 'MTP Entertainment',
+                managers: [
+                  {
+                    name: 'Nguyễn Tiến Dũng',
+                    avatar:
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  },
+                  {
+                    name: 'Nguyễn Phương Thảo',
+                    avatar:
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  },
+                ],
+              },
+              {
+                name: 'ICM Entertainment',
+                managers: [
+                  {
+                    name: 'Nguyễn Tiến Dũng',
+                    avatar:
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  },
+                  {
+                    name: 'Nguyễn Phương Thảo',
+                    avatar:
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  },
+                ],
+              },
+              {
+                name: 'Chi nhanh HIPHOP',
+                managers: [
+                  {
+                    name: 'Nguyễn Tiến Dũng',
+                    avatar:
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  },
+                  {
+                    name: 'Nguyễn Phương Thảo',
+                    avatar:
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: 'Khối sản xuât',
+            managers: [
+              {
+                name: 'Nguyễn Tiến Dũng',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              },
+              {
+                name: 'Nguyễn Phương Thảo',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              },
+            ],
           },
         ],
       },
