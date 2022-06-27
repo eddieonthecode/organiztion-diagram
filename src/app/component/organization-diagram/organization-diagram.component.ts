@@ -47,6 +47,26 @@ export class OrganizationDiagramComponent implements OnInit {
     this.startX = e.clientX - parseInt(getComputedStyle(this.element).left);
     this.startY = e.clientY - parseInt(getComputedStyle(this.element).top);
   }
+  mousedownControl(e) {
+    e.stopPropagation();
+  }
+  changePercent(e) {
+    this.zoomPercent = e.target.value;
+    this.element.style.zoom = e.target.value * 2 + '%';
+  }
+  scroll(e) {
+    if (e.deltaY < 0) {
+      if (this.zoomPercent < 96) {
+        this.zoomPercent += 4;
+        this.element.style.zoom = this.zoomPercent * 2 + '%';
+      }
+    } else {
+      if (this.zoomPercent > 4) {
+        this.zoomPercent -= 4;
+        this.element.style.zoom = this.zoomPercent * 2 + '%';
+      }
+    }
+  }
 
   /**
    * Xóa vùng đang chọn

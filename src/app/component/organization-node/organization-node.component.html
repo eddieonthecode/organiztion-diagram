@@ -65,6 +65,7 @@
   >
     <!-- Ẩn đường thừa -->
     <div
+      *ngIf="first || last"
       class="organization__hidden-line position-absolute"
       [class.first]="first"
       [class.last]="last"

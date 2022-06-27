@@ -7,14 +7,22 @@
     left: 50%;
     top: 10px;
     transform: translateX(-50%);
-    zoom: 60%;
+    zoom: 100%;
     &__control {
-      width: 120px;
-      height: 30px;
-      background-color: red;
+      width: 160px;
       top: 10px;
       left: 10px;
       border-radius: 4px;
+      z-index: 50;
+      background-color: #fff;
+      border: 1px solid #ccc;
+    }
+    &__zoom {
+      &-slide {
+        input {
+          width: calc(100% - 20px);
+        }
+      }
     }
   }
 }
