@@ -46,6 +46,10 @@ export class OrganizationNodeComponent implements OnInit {
     }
   }
 
+  toggleCollapse() {
+    this.nodeData.collapse = !this.nodeData.collapse;
+  }
+
   /**
    * Chuyển đổi đơn vị
    * createdby ntdung5 28.06.2022

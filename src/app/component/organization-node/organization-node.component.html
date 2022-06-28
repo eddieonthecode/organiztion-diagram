@@ -50,7 +50,7 @@
       "
       [class.plus]="nodeData.collapse"
       [class.minus]="!nodeData.collapse"
-      (click)="nodeData.collapse = !nodeData.collapse"
+      (click)="toggleCollapse()"
       *ngIf="nodeData.children && nodeData.children.length"
     >
       <i *ngIf="nodeData.collapse" class="fa-solid fa-plus"></i>
