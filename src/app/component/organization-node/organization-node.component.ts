@@ -12,6 +12,7 @@ export class OrganizationNodeComponent implements OnInit {
   @Input() last: boolean = false;
   @Input() siblings = [];
   @Input() index: number;
+  @Input() parentAbsolute: boolean = false;
   constructor() {}
 
   ngOnInit() {}
@@ -46,29 +47,70 @@ export class OrganizationNodeComponent implements OnInit {
   }
 
   /**
-   * Là vị trí tương đối - Cho phép các node sát nhau hơn
-   * createdby ntdung5 27.06.2022
+   * Chuyển đổi đơn vị
+   * createdby ntdung5 28.06.2022
    */
-  get isAbsolute() {
-    if (!this.nodeData.children || this.nodeData.children.length == 0) {
-      return false;
-    } else {
-      let prevNode = this.siblings[this.index - 1];
-      let nextNode = this.siblings[this.index + 1];
-      if (
-        (!prevNode ||
-          !prevNode.children ||
-          prevNode.children.length == 0 ||
-          prevNode.collapse) &&
-        (!nextNode ||
-          !nextNode.children ||
-          nextNode.children.length == 0 ||
-          nextNode.collapse)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
+  // get convertUnit() {
+  //   let offset = this.relativeOffset;
+  //   let unit = 220;
+  //   let result;
+  //   switch (offset.code) {
+  //     case 'prev':
+  //       if (offset.child % 2 == 0) {
+  //         result = { right: (offset.child / 2 - 0.5) * unit + 'px' };
+  //       } else {
+  //         result = { right: Math.floor(offset.child / 2) * unit + 'px' };
+  //       }
+  //       break;
+  //     case 'next':
+  //       if (offset.child % 2 == 0) {
+  //         result = { left: (offset.child / 2 - 0.5) * unit + 'px' };
+  //       } else {
+  //         result = { left: Math.floor(offset.child / 2) * unit + 'px' };
+  //       }
+  //       break;
+  //     case 'none':
+  //       result = null;
+  //       break;
+  //     default:
+  //       result = null;
+  //       break;
+  //   }
+  //   this.nodeData.position = result;
+  //   return result;
+  // }
+
+  // /**
+  //  * Là vị trí tương đối - Cho phép các node sát nhau hơn
+  //  * createdby ntdung5 27.06.2022
+  //  */
+  // get relativeOffset() {
+  //   if (
+  //     !this.nodeData.children ||
+  //     this.nodeData.children.length == 0 ||
+  //     this.nodeData.collapse
+  //   ) {
+  //     let prevNode = this.siblings[this.index - 1];
+  //     let nextNode = this.siblings[this.index + 1];
+  //     if (
+  //       prevNode &&
+  //       prevNode.children &&
+  //       prevNode.children.length &&
+  //       !prevNode.collapse
+  //     ) {
+  //       return { code: 'prev', child: prevNode.children.length };
+  //     }
+  //     if (
+  //       nextNode &&
+  //       nextNode.children &&
+  //       nextNode.children.length &&
+  //       !nextNode.collapse
+  //     ) {
+  //       return { code: 'next', child: nextNode.children.length };
+  //     }
+  //     return { code: 'none' };
+  //   } else {
+  //     return { code: 'none' };
+  //   }
+  // }
 }

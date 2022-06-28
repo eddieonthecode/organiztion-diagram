@@ -10,18 +10,33 @@
       (mousedown)="$event.stopPropagation(); mousedownControl($event)"
     >
       <div class="organization__zoom d-flex p-y-4 p-x-10 align-items-center">
-        <div class="organization__zoom-slide">
+        <div
+          class="
+            organization__zoom-slide
+            d-flex
+            align-items-center
+            justify-content-center
+            m-r-10
+            position-relative
+          "
+        >
           <input
             type="range"
             min="5"
             max="100"
             [value]="zoomPercent"
             (input)="changePercent($event)"
-            class="d-flex flex-grow-1 m-r-10"
-            id="myRange"
+            class="d-flex flex-grow-1 position-relative"
+            #input
           />
+          <div
+            [class.active]="zoomPercent >= 50"
+            class="middle__line position-absolute"
+          ></div>
         </div>
-        <div class="organization__zoom-percent">{{ zoomPercent + '%' }}</div>
+        <div class="organization__zoom-percent d-flex justify-content-center">
+          {{ zoomPercent + '%' }}
+        </div>
       </div>
     </div>
     <div

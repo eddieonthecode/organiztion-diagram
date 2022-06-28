@@ -1,6 +1,11 @@
 <div class="d-flex flex-column align-items-center">
-  <div [class]="numberToString(level)" class="organization__node m-x-10">
-    <div class="organization__name text-ellipsis-2" [title]="nodeData.name">
+  <div [class]="numberToString(level)" class="organization__node m-x-10" #node>
+    <!-- [style]="convertUnit || nodeData.position" -->
+    <div
+      class="organization__name text-ellipsis-2"
+      [title]="nodeData.name"
+      (mousedown)="$event.stopPropagation()"
+    >
       {{ nodeData.name }}
     </div>
     <!-- Thông tin người quản lý -->
@@ -13,11 +18,13 @@
           <div
             class="organization__manager-name"
             [title]="nodeData.managers[0].name"
+            (mousedown)="$event.stopPropagation()"
           >
             {{ nodeData.managers[0].name }}
           </div>
         </div>
-        <div>{{ isAbsolute }}</div>
+        <!-- <div>{{ convertUnit | json }}</div>
+        <div>{{ nodeData.position | json }}</div> -->
         <div
           *ngIf="nodeData.managers.length > 1"
           class="organization__manager-multi"
@@ -64,8 +71,6 @@
     [style.opacity]="!nodeData.collapse ? 1 : 0"
     class="organization__children position-relative d-flex m-t-40"
   >
-    <!-- [class.position-absolute]="isAbsolute && level != 1"
-    [style.top]="isAbsolute && level != 1 ? '90px' : 'unset'" -->
     <!-- Ẩn đường thừa -->
     <div
       *ngIf="first || last"

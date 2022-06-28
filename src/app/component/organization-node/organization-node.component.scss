@@ -1,3 +1,5 @@
+$lineColor: #000;
+
 .organization {
   &__node {
     border: 1px solid #ccc;
@@ -96,12 +98,12 @@
     &::before {
       display: block;
       content: '';
-      background-color: #ccc;
+      background-color: $lineColor;
       position: absolute;
       top: -20px;
       left: 50%;
       transform: translateX(-50%);
-      width: calc(100% - 200px - 22px);
+      width: calc(100% - 200px - 22px + 2px);
       height: 1px;
     }
   }
@@ -109,19 +111,19 @@
     height: 21px;
     width: 1px;
     position: absolute;
-    background-color: #ccc;
+    background-color: $lineColor;
     top: 0;
     left: 50%;
-    transform: translate(-50%, -100%);
+    transform: translateY(-100%);
   }
   &__line-bottom {
     height: 21px;
     width: 1px;
     position: absolute;
-    background-color: #ccc;
+    background-color: $lineColor;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
+    // transform: translateX(-50%);
   }
   &__hidden-line {
     height: 1px;
@@ -130,9 +132,10 @@
     background-color: #fff !important;
 
     &.first {
+      left: -1px;
     }
     &.last {
-      right: 0;
+      right: 1px;
     }
   }
 }
