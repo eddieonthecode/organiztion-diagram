@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from '../../service/data-service.service';
 @Component({
@@ -22,14 +23,14 @@ export class OrganizationDiagramComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.data.currentMessage.subscribe(() => {});
+    this.data.currentMessage.subscribe(() => {
+      // this.element.style.transformOrigin = 'center';
+      // setTimeout(() => {
+      //   this.element.style.transformOrigin = '50% 0';
+      // }, 0);
+    });
 
     this.element = this.draggable.nativeElement;
-    // let sizeMain = this.element.getBoundingClientRect();
-    // let sizeContainer = this.container.nativeElement.getBoundingClientRect();
-    // this.element.style.left = (sizeContainer.width - sizeMain.width) / 2 + 'px';
-    // this.element.style.top =
-    //   (sizeContainer.height - sizeMain.height) / 2 + 'px';
 
     // Sự kiện di chuột khắp màn hình
     document.addEventListener('mousemove', (e) => {
@@ -58,6 +59,53 @@ export class OrganizationDiagramComponent implements OnInit {
       }
     });
   }
+
+  detectBrowser() {
+    // Opera 8.0+
+    var isOpera =
+      (!!window.opr && !!opr.addons) ||
+      !!window.opera ||
+      navigator.userAgent.indexOf(' OPR/') >= 0;
+
+    // Firefox 1.0+
+    var isFirefox = typeof InstallTrigger !== 'undefined';
+
+    // Safari 3.0+ "[object HTMLElementConstructor]"
+    var isSafari =
+      /constructor/i.test(window.HTMLElement) ||
+      (function (p) {
+        return p.toString() === '[object SafariRemoteNotification]';
+      })(
+        !window['safari'] ||
+          (typeof safari !== 'undefined' && window['safari'].pushNotification)
+      );
+
+    // Internet Explorer 6-11
+    var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+
+    // Edge 20+
+    var isEdge = !isIE && !!window.StyleMedia;
+
+    // Chrome 1 - 79
+    var isChrome =
+      !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+    // Edge (based on chromium) detection
+    var isEdgeChromium = isChrome && navigator.userAgent.indexOf('Edg') != -1;
+
+    // Blink engine detection
+    var isBlink = (isChrome || isOpera) && !!window.CSS;
+    return {
+      isOpera,
+      isFirefox,
+      isSafari,
+      isIE,
+      isEdge,
+      isChrome,
+      isEdgeChromium,
+      isBlink,
+    };
+  }
   /**
    * Sự kiện ấn chuột xuống
    * createdby ntdung5 13.06.2022
@@ -66,9 +114,11 @@ export class OrganizationDiagramComponent implements OnInit {
     this.isMoving = true;
 
     // Scale
-    this.startX = e.clientX - parseInt(getComputedStyle(this.element).left);
+    // if (this.detectBrowser().isFirefox) {
     this.startY = e.clientY - parseInt(getComputedStyle(this.element).top);
-    // Zoom
+    this.startX = e.clientX - parseInt(getComputedStyle(this.element).left);
+    // } else {
+    //   // Zoom
     // this.startX =
     //   e.clientX -
     //   (parseInt(getComputedStyle(this.element).left) * 2 * this.zoomPercent) /
@@ -77,6 +127,7 @@ export class OrganizationDiagramComponent implements OnInit {
     //   e.clientY -
     //   (parseInt(getComputedStyle(this.element).top) * 2 * this.zoomPercent) /
     //     100;
+    // }
   }
   mousedownControl(e) {
     e.stopPropagation();
@@ -106,10 +157,10 @@ export class OrganizationDiagramComponent implements OnInit {
   }
   setZoom() {
     // this.element.style.zoom = this.zoomPercent * 2 + '%';
-    this.element.style.transform = `scale(${(this.zoomPercent * 2) / 100})`;
-    // this.element.style.transform = `scale(${
-    //   (this.zoomPercent * 2) / 100
-    // }) translateX(-50%)`;
+    // this.element.style.transform = `scale(${(this.zoomPercent * 2) / 100})`;
+    this.element.style.transform = `scale(${
+      (this.zoomPercent * 2) / 100
+    }) translateX(-50%)`;
   }
 
   /**

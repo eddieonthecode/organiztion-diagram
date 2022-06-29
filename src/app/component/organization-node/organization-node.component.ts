@@ -37,8 +37,10 @@ export class OrganizationNodeComponent implements OnInit {
     let position = e.position;
     if (this.nodeData.children[e.index - 1] && e.position.left) {
       this.nodeData.children[e.index - 1].position = position;
-      console.log(this.nodeData.children[e.index - 1]);
-      console.log(this.nodeData);
+      setTimeout(() => {
+        this.nodeData.children[e.index - 1].position = position;
+        console.log(this.nodeData, position);
+      }, 200);
     }
     if (this.nodeData.children[e.index + 1] && e.position.right) {
       this.nodeData.children[e.index + 1].position = position;

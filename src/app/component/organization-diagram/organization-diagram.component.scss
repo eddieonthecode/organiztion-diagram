@@ -6,10 +6,9 @@
   .organization {
     left: 50%;
     top: 10px;
-    // transform: scale(1);
-    // scale: 2;
+    transform: translateX(-50%);
     position: absolute;
-    // zoom: 100%;
+    transform-origin: center;
     &__control {
       width: 160px;
       top: 10px;

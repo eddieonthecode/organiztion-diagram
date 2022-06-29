@@ -227,6 +227,102 @@ export class AppComponent {
         ],
       },
       {
+        name: 'Khối sản xuất',
+        managers: [
+          {
+            name: 'Nguyễn Tiến Dũng',
+            avatar:
+              'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+          },
+          {
+            name: 'Nguyễn Phương Thảo',
+            avatar:
+              'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+          },
+        ],
+        children: [
+          {
+            name: 'Khối doanh nghiệp vừa và lớn',
+            managers: [
+              {
+                name: 'Nguyễn Tiến Dũng',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              },
+              {
+                name: 'Nguyễn Phương Thảo',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              },
+            ],
+          },
+          {
+            name: 'Viện đào tạo và nghiên cứu công nghệ',
+            managers: [
+              {
+                name: 'Nguyễn Tiến Dũng',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              },
+              {
+                name: 'Nguyễn Phương Thảo',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              },
+            ],
+            children: [
+              {
+                name: 'Phòng đào tạo',
+                managers: [
+                  {
+                    name: 'Nguyễn Tiến Dũng',
+                    avatar:
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  },
+                  {
+                    name: 'Nguyễn Phương Thảo',
+                    avatar:
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  },
+                ],
+                children: [
+                  {
+                    name: 'Phòng nghiên cứu công nghệ',
+                    managers: [
+                      {
+                        name: 'Nguyễn Tiến Dũng',
+                        avatar:
+                          'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      },
+                      {
+                        name: 'Nguyễn Phương Thảo',
+                        avatar:
+                          'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            name: 'Khối sản xuất',
+            managers: [
+              {
+                name: 'Nguyễn Tiến Dũng',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              },
+              {
+                name: 'Nguyễn Phương Thảo',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              },
+            ],
+          },
+        ],
+      },
+      {
         name: 'Trung tâm tư vấn và hỗ trợ khách hàng',
         managers: [
           {
