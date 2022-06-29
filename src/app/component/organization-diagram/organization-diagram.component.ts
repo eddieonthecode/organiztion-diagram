@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-
+import { DataService } from '../../service/data-service.service';
 @Component({
   selector: 'app-organization-diagram',
   templateUrl: './organization-diagram.component.html',
@@ -9,9 +9,10 @@ export class OrganizationDiagramComponent implements OnInit {
   @ViewChild('draggable', { read: ElementRef }) draggable: ElementRef;
   @ViewChild('wrapper', { read: ElementRef }) wrapper: ElementRef;
   @ViewChild('input', { read: ElementRef }) input: ElementRef;
+  @ViewChild('container', { read: ElementRef }) container: ElementRef;
 
   @Input() organizationData: any;
-  constructor() {}
+  constructor(private data: DataService) {}
   isMoving = false;
   startX = 0;
   startY = 0;
@@ -21,7 +22,26 @@ export class OrganizationDiagramComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
+    // this.data.currentMessage.subscribe(() => {
+    //   if (this.element && this.container.nativeElement) {
+    //     setTimeout(() => {
+    //       let sizeMain = this.element.getBoundingClientRect();
+    //       let sizeContainer =
+    //         this.container.nativeElement.getBoundingClientRect();
+    //       console.log(sizeContainer.width - sizeMain.width);
+    //       this.element.style.left =
+    //         (sizeContainer.width - sizeMain.width) / 2 + 'px';
+    //     }, 0);
+    //   }
+    // });
+
     this.element = this.draggable.nativeElement;
+    // let sizeMain = this.element.getBoundingClientRect();
+    // let sizeContainer = this.container.nativeElement.getBoundingClientRect();
+    // this.element.style.left = (sizeContainer.width - sizeMain.width) / 2 + 'px';
+    // this.element.style.top =
+    //   (sizeContainer.height - sizeMain.height) / 2 + 'px';
+
     // Sự kiện di chuột khắp màn hình
     document.addEventListener('mousemove', (e) => {
       if (this.isMoving) {

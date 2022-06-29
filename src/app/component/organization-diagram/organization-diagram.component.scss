@@ -6,7 +6,9 @@
   .organization {
     left: 50%;
     top: 10px;
-    transform: scale(1);
+    // transform: scale(1);
+    // scale: 2;
+    position: absolute;
     // zoom: 100%;
     &__control {
       width: 160px;

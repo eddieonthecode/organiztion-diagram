@@ -4,6 +4,7 @@
     (mousedown)="mousedown($event)"
     (wheel)="scroll($event)"
     class="organization-diagram position-relative flex-grow-1 m-b-20 m-x-30"
+    #container
   >
     <div
       class="organization__control position-absolute"
@@ -35,7 +36,7 @@
           ></div>
         </div>
         <div class="organization__zoom-percent d-flex justify-content-center">
-          {{ zoomPercent + '%' }}
+          {{ zoomPercent * 2 + '%' }}
         </div>
       </div>
     </div>

@@ -1,6 +1,11 @@
 <div class="d-flex flex-column align-items-center">
-  <div [class]="numberToString(level)" class="organization__node m-x-10" #node>
-    <!-- [style]="convertUnit || nodeData.position" -->
+  <div
+    [style]="convertUnit || nodeData.position"
+    [class]="numberToString(level)"
+    class="organization__node m-x-10"
+    #node
+  >
+    <div class="organization__node__head-line position-relative"></div>
     <div
       class="organization__name text-ellipsis-2"
       [title]="nodeData.name"
@@ -78,7 +83,13 @@
       [class.first]="first"
       [class.last]="last"
     ></div>
-    <div *ngFor="let child of nodeData.children; let i = index">
+    <div
+      *ngFor="
+        let child of nodeData.children;
+        let i = index;
+        trackBy: trackItem(i)
+      "
+    >
       <app-organization-node
         [nodeData]="child"
         [level]="level + 1"
@@ -86,6 +97,7 @@
         [last]="i == nodeData.children.length - 1"
         [siblings]="nodeData.children"
         [index]="i"
+        (updatePosition)="updatePositionHandler($event)"
       ></app-organization-node>
     </div>
   </div>
