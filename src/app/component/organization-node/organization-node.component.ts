@@ -33,24 +33,15 @@ export class OrganizationNodeComponent implements OnInit {
       });
     }
   }
-  public trackItem(index: number) {
-    return index;
-  }
-
   updatePositionHandler(e) {
+    let position = e.position;
     if (this.nodeData.children[e.index - 1] && e.position.left) {
-      console.log(e.position);
-      let childrenClone = JSON.parse(
-        JSON.stringify(this.nodeData.children[e.index - 1])
-      );
-      childrenClone.position = e.position;
-      this.nodeData.children[e.index - 1] = childrenClone;
-      setTimeout(() => {
-        console.log(this.nodeData);
-      }, 100);
+      this.nodeData.children[e.index - 1].position = position;
+      console.log(this.nodeData.children[e.index - 1]);
+      console.log(this.nodeData);
     }
     if (this.nodeData.children[e.index + 1] && e.position.right) {
-      this.nodeData.children[e.index + 1].position = e.position;
+      this.nodeData.children[e.index + 1].position = position;
     }
   }
   /**

@@ -22,18 +22,7 @@ export class OrganizationDiagramComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    // this.data.currentMessage.subscribe(() => {
-    //   if (this.element && this.container.nativeElement) {
-    //     setTimeout(() => {
-    //       let sizeMain = this.element.getBoundingClientRect();
-    //       let sizeContainer =
-    //         this.container.nativeElement.getBoundingClientRect();
-    //       console.log(sizeContainer.width - sizeMain.width);
-    //       this.element.style.left =
-    //         (sizeContainer.width - sizeMain.width) / 2 + 'px';
-    //     }, 0);
-    //   }
-    // });
+    this.data.currentMessage.subscribe(() => {});
 
     this.element = this.draggable.nativeElement;
     // let sizeMain = this.element.getBoundingClientRect();

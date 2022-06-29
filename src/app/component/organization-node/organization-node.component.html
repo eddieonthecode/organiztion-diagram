@@ -83,13 +83,7 @@
       [class.first]="first"
       [class.last]="last"
     ></div>
-    <div
-      *ngFor="
-        let child of nodeData.children;
-        let i = index;
-        trackBy: trackItem(i)
-      "
-    >
+    <div *ngFor="let child of nodeData.children; let i = index">
       <app-organization-node
         [nodeData]="child"
         [level]="level + 1"
