@@ -20,32 +20,10 @@ export class OrganizationNodeComponent implements OnInit {
   @Input() siblings = [];
   @Input() index: number;
   @Input() parentAbsolute: boolean = false;
-  @Output() updatePosition = new EventEmitter<any>();
   constructor(private data: DataService, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {}
 
-  ngAfterViewInit() {
-    if (this.convertUnit) {
-      this.updatePosition.emit({
-        position: this.convertUnit,
-        index: this.index,
-      });
-    }
-  }
-  updatePositionHandler(e) {
-    let position = e.position;
-    if (this.nodeData.children[e.index - 1] && e.position.left) {
-      this.nodeData.children[e.index - 1].position = position;
-      setTimeout(() => {
-        this.nodeData.children[e.index - 1].position = position;
-        console.log(this.nodeData, position);
-      }, 200);
-    }
-    if (this.nodeData.children[e.index + 1] && e.position.right) {
-      this.nodeData.children[e.index + 1].position = position;
-    }
-  }
   /**
    * Chuyển số level sang class ứng với nó
    * createdby ntdung5 27.06.2022
@@ -86,32 +64,41 @@ export class OrganizationNodeComponent implements OnInit {
    */
   get convertUnit() {
     let offset = this.relativeOffset;
-    let unit = 220;
-    let result;
-    switch (offset.code) {
-      case 'prev':
-        if (offset.child % 2 == 0) {
-          result = { right: (offset.child / 2 - 0.5) * unit + 'px' };
-        } else {
-          result = { right: Math.floor(offset.child / 2) * unit + 'px' };
+    if (offset.code != 'none') {
+      let unit = 220;
+      let result;
+      switch (offset.code) {
+        case 'prev':
+          if (offset.child % 2 == 0) {
+            result = { right: (offset.child / 2 - 0.5) * unit + 'px' };
+          } else {
+            result = { right: Math.floor(offset.child / 2) * unit + 'px' };
+          }
+          break;
+        case 'next':
+          if (offset.child % 2 == 0) {
+            result = { left: (offset.child / 2 - 0.5) * unit + 'px' };
+          } else {
+            result = { left: Math.floor(offset.child / 2) * unit + 'px' };
+          }
+          break;
+        default:
+          result = null;
+          break;
+      }
+      this.nodeData.position = result;
+      if (result) {
+        if (this.siblings[this.index - 1] && result.left) {
+          this.siblings[this.index - 1].position = result;
         }
-        break;
-      case 'next':
-        if (offset.child % 2 == 0) {
-          result = { left: (offset.child / 2 - 0.5) * unit + 'px' };
-        } else {
-          result = { left: Math.floor(offset.child / 2) * unit + 'px' };
+        if (this.siblings[this.index + 1] && result.right) {
+          this.siblings[this.index + 1].position = result;
         }
-        break;
-      case 'none':
-        result = null;
-        break;
-      default:
-        result = null;
-        break;
+      }
+      return result;
+    } else {
+      return null;
     }
-    this.nodeData.position = result;
-    return result;
   }
 
   /**
@@ -146,5 +133,18 @@ export class OrganizationNodeComponent implements OnInit {
     } else {
       return { code: 'none' };
     }
+  }
+
+  styleHiddenLine() {
+    let convertUnit = this.convertUnit;
+    if (convertUnit) {
+      if (convertUnit.left) {
+        return { width: `calc(50% + ${convertUnit.left})` };
+      }
+      if (convertUnit.right) {
+        return { width: `calc(50% + ${convertUnit.right})` };
+      }
+    }
+    return {};
   }
 }
