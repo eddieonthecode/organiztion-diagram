@@ -3,18 +3,19 @@
   border-radius: 8px;
   background-color: #fff;
   overflow: hidden;
+  z-index: 100;
   .organization {
     left: 50%;
     top: 10px;
     transform: translateX(-50%);
     position: absolute;
-    transform-origin: 50% 0;
+    transform-origin: center;
     &__control {
       width: 200px;
       top: 10px;
       left: 10px;
       border-radius: 4px;
-      z-index: 50;
+      z-index: 100;
       background-color: #fff;
       border: 1px solid #ccc;
       /***** Thumb Styles *****/
@@ -101,6 +102,7 @@
         cursor: pointer;
         height: 34px;
         width: 34px;
+        background-color: #fff;
       }
     }
   }

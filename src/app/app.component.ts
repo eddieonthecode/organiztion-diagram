@@ -9,7 +9,13 @@ export class AppComponent {
   name = 'Angular ' + VERSION.major;
   organizationData = {
     name: 'Công ty cổ phần HIPHOP quá tuyệt vời quá đỉnh quá xịn quá vip',
-    managers: [{ name: 'Nguyễn Tiến Dũng' }],
+    managers: [
+      {
+        name: 'Nguyễn Tiến Dũng',
+        avatar:
+          'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+      },
+    ],
     children: [
       {
         name: 'Khối sản xuất',
@@ -17,12 +23,12 @@ export class AppComponent {
           {
             name: 'Nguyễn Tiến Dũng',
             avatar:
-              'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
           },
           {
             name: 'Nguyễn Phương Thảo',
             avatar:
-              'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              'https://cdn.oneesports.vn/cdn-data/sites/4/2022/02/hinh-nen-Luffy-2K-chat-ngau.jpg',
           },
         ],
         children: [
@@ -32,12 +38,42 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+              },
+              {
+                name: 'Nguyễn Tiến Dũng',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+              },
+              {
+                name: 'Nguyễn Phương Thảo',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+              },
+              {
+                name: 'Nguyễn Tiến Dũng',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+              },
+              {
+                name: 'Nguyễn Phương Thảo',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+              },
+              {
+                name: 'Nguyễn Tiến Dũng',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+              },
+              {
+                name: 'Nguyễn Phương Thảo',
+                avatar:
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
           },
@@ -47,12 +83,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
             children: [
@@ -62,12 +98,12 @@ export class AppComponent {
                   {
                     name: 'Nguyễn Tiến Dũng',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                   {
                     name: 'Nguyễn Phương Thảo',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                 ],
                 children: [
@@ -77,12 +113,12 @@ export class AppComponent {
                       {
                         name: 'Nguyễn Tiến Dũng',
                         avatar:
-                          'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                          'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                       },
                       {
                         name: 'Nguyễn Phương Thảo',
                         avatar:
-                          'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                          'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                       },
                     ],
                   },
@@ -96,12 +132,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
           },
@@ -113,7 +149,7 @@ export class AppComponent {
           {
             name: 'Nguyễn Đình Mạnh',
             avatar:
-              'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
           },
         ],
         children: [
@@ -123,12 +159,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
           },
@@ -138,12 +174,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
           },
@@ -153,12 +189,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
             children: [
@@ -168,12 +204,12 @@ export class AppComponent {
                   {
                     name: 'Nguyễn Tiến Dũng',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                   {
                     name: 'Nguyễn Phương Thảo',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                 ],
               },
@@ -183,12 +219,12 @@ export class AppComponent {
                   {
                     name: 'Nguyễn Tiến Dũng',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                   {
                     name: 'Nguyễn Phương Thảo',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                 ],
               },
@@ -198,12 +234,12 @@ export class AppComponent {
                   {
                     name: 'Nguyễn Tiến Dũng',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                   {
                     name: 'Nguyễn Phương Thảo',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                 ],
               },
@@ -215,12 +251,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
           },
@@ -232,12 +268,12 @@ export class AppComponent {
           {
             name: 'Nguyễn Tiến Dũng',
             avatar:
-              'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
           },
           {
             name: 'Nguyễn Phương Thảo',
             avatar:
-              'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
           },
         ],
         children: [
@@ -247,12 +283,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
           },
@@ -262,12 +298,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
             children: [
@@ -277,12 +313,12 @@ export class AppComponent {
                   {
                     name: 'Nguyễn Tiến Dũng',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                   {
                     name: 'Nguyễn Phương Thảo',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                 ],
                 children: [
@@ -292,12 +328,12 @@ export class AppComponent {
                       {
                         name: 'Nguyễn Tiến Dũng',
                         avatar:
-                          'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                          'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                       },
                       {
                         name: 'Nguyễn Phương Thảo',
                         avatar:
-                          'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                          'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                       },
                     ],
                   },
@@ -311,12 +347,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
           },
@@ -328,7 +364,7 @@ export class AppComponent {
           {
             name: 'Đào Thị Anh',
             avatar:
-              'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
           },
         ],
         children: [
@@ -338,12 +374,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
             children: [
@@ -353,12 +389,12 @@ export class AppComponent {
                   {
                     name: 'Nguyễn Tiến Dũng',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                   {
                     name: 'Nguyễn Phương Thảo',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                 ],
               },
@@ -368,12 +404,12 @@ export class AppComponent {
                   {
                     name: 'Nguyễn Tiến Dũng',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                   {
                     name: 'Nguyễn Phương Thảo',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                 ],
               },
@@ -383,12 +419,12 @@ export class AppComponent {
                   {
                     name: 'Nguyễn Tiến Dũng',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                   {
                     name: 'Nguyễn Phương Thảo',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                 ],
               },
@@ -398,12 +434,12 @@ export class AppComponent {
                   {
                     name: 'Nguyễn Tiến Dũng',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                   {
                     name: 'Nguyễn Phương Thảo',
                     avatar:
-                      'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                      'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
                   },
                 ],
               },
@@ -415,12 +451,12 @@ export class AppComponent {
               {
                 name: 'Nguyễn Tiến Dũng',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
               {
                 name: 'Nguyễn Phương Thảo',
                 avatar:
-                  'https://gamek.mediacdn.vn/133514250583805952/2020/7/11/narutossagemode-15944657133061535033027.png',
+                  'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
               },
             ],
           },

@@ -13,8 +13,14 @@
       <div class="organization__managers">
         <div
           *ngIf="nodeData.managers.length == 1"
-          class="organization__manager-single"
+          class="organization__manager-single d-flex align-items-center"
         >
+          <div class="organization__manager-avatar m-r-8 d-flex">
+            <img
+              [src]="nodeData.managers && nodeData.managers[0].avatar"
+              [alt]="nodeData.managers[0].name"
+            />
+          </div>
           <div
             class="organization__manager-name"
             [title]="nodeData.managers[0].name"
@@ -27,8 +33,67 @@
         <div>{{ nodeData.position | json }}</div> -->
         <div
           *ngIf="nodeData.managers.length > 1"
-          class="organization__manager-multi"
-        ></div>
+          class="organization__manager-multi d-flex"
+        >
+          <div class="d-flex" *ngIf="nodeData.managers.length <= 4">
+            <div
+              *ngFor="let manager of nodeData.managers"
+              class="organization__manager-item d-flex"
+            >
+              <img
+                draggable="false"
+                [src]="manager.avatar"
+                [alt]="manager.name"
+                [title]="manager.name"
+              />
+            </div>
+          </div>
+          <div class="d-flex" *ngIf="nodeData.managers.length > 4">
+            <div
+              *ngFor="let number of [0, 1, 2]"
+              class="organization__manager-item d-flex"
+            >
+              <img
+                draggable="false"
+                [src]="nodeData.managers[number].avatar"
+                [alt]="nodeData.managers[number].name"
+                [title]="nodeData.managers[number].name"
+              />
+            </div>
+            <div
+              class="
+                organization__manager-item
+                d-flex
+                flex-center
+                more
+                position-relative
+              "
+              [style.z-index]="100 - level"
+            >
+              <div class="d-flex flex-center">+</div>
+              {{ nodeData.managers.length - 3 }}
+              <div
+                class="organization__manager-more position-absolute"
+                [style.z-index]="100 - level"
+              >
+                <div
+                  *ngFor="let manager of nodeData.managers.slice(3)"
+                  class="organization__manager-more__item d-flex"
+                >
+                  <div class="organization__manager-item">
+                    <img [src]="manager.avatar" [alt]="manager.name" />
+                  </div>
+                  <div
+                    [title]="manager.name"
+                    class="organization__manager-name text-nowrap"
+                  >
+                    {{ manager.name }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- Số lượng nhánh con -->
       <div
@@ -41,13 +106,7 @@
     </div>
     <!-- Nút extend/collapse nhánh -->
     <div
-      class="
-        organization__togglechild
-        position-absolute
-        d-flex
-        align-items-center
-        justify-content-center
-      "
+      class="organization__togglechild position-absolute d-flex flex-center"
       [class.plus]="nodeData.collapse"
       [class.minus]="!nodeData.collapse"
       (click)="toggleCollapse()"
