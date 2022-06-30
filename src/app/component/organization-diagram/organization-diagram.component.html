@@ -20,8 +20,10 @@
             m-r-10
             position-relative
           "
-          
         >
+          <div class="organization__zoom-icon m-r-10" (click)="scroll(1)">
+            <i class="fa-solid fa-minus"></i>
+          </div>
           <input
             type="range"
             min="5"
@@ -31,13 +33,35 @@
             class="d-flex flex-grow-1 position-relative"
             #input
           />
+          <div class="organization__zoom-icon m-l-10" (click)="scroll(-1)">
+            <i class="fa-solid fa-plus"></i>
+          </div>
           <div
             [class.active]="zoomPercent >= 50"
             class="middle__line position-absolute"
           ></div>
         </div>
-        <div class="organization__zoom-percent d-flex justify-content-center">
+        <div
+          class="
+            organization__zoom-percent
+            d-flex
+            justify-content-end
+            position-relative
+          "
+        >
           {{ zoomPercent * 2 + '%' }}
+          <div
+            class="
+              organization__zoom-center
+              position-absolute
+              d-flex
+              justify-content-center
+              align-items-center
+            "
+            (click)="recenter()"
+          >
+            <i class="fa-solid fa-arrows-to-circle"></i>
+          </div>
         </div>
       </div>
     </div>

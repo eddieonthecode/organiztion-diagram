@@ -10,7 +10,7 @@
     position: absolute;
     transform-origin: 50% 0;
     &__control {
-      width: 160px;
+      width: 200px;
       top: 10px;
       left: 10px;
       border-radius: 4px;
@@ -77,6 +77,30 @@
       &-percent {
         min-width: 40px;
         max-width: 40px;
+        font-size: 13px;
+        &::before {
+          display: block;
+          content: '';
+          height: 33px;
+          width: 1px;
+          background-color: #ccc;
+          position: absolute;
+          left: 0;
+          top: -6px;
+        }
+      }
+      &-icon {
+        cursor: pointer;
+      }
+      &-center {
+        padding: 2px;
+        right: -52px;
+        top: -7px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        height: 34px;
+        width: 34px;
       }
     }
   }

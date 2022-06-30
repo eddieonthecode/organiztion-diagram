@@ -37,18 +37,10 @@ export class OrganizationDiagramComponent implements OnInit {
       if (this.isMoving) {
         this.element.style.cursor = 'all-scroll';
         this.clearSelection();
-        // Scale
         this.element.style.left = e.clientX - this.startX + 'px';
         this.element.style.right = 'unset';
         this.element.style.top = e.clientY - this.startY + 'px';
         this.element.style.bottom = 'unset';
-        // Zoom
-        // this.element.style.left =
-        //   ((e.clientX - this.startX) * 100) / (this.zoomPercent * 2) + 'px';
-        // this.element.style.right = 'unset';
-        // this.element.style.top =
-        //   ((e.clientY - this.startY) * 100) / (this.zoomPercent * 2) + 'px';
-        // this.element.style.bottom = 'unset';
       }
     });
     // Sự kiện nhấc chuột lên
@@ -112,34 +104,32 @@ export class OrganizationDiagramComponent implements OnInit {
    */
   mousedown(e) {
     this.isMoving = true;
-
-    // Scale
-    // if (this.detectBrowser().isFirefox) {
     this.startY = e.clientY - parseInt(getComputedStyle(this.element).top);
     this.startX = e.clientX - parseInt(getComputedStyle(this.element).left);
-    // } else {
-    //   // Zoom
-    // this.startX =
-    //   e.clientX -
-    //   (parseInt(getComputedStyle(this.element).left) * 2 * this.zoomPercent) /
-    //     100;
-    // this.startY =
-    //   e.clientY -
-    //   (parseInt(getComputedStyle(this.element).top) * 2 * this.zoomPercent) /
-    //     100;
-    // }
   }
+
   mousedownControl(e) {
     e.stopPropagation();
   }
+
+  recenter() {
+    this.element.style.left = '50%';
+    this.element.style.top = '20px';
+    this.zoomPercent = 50;
+    this.setZoom();
+    this.input.nativeElement.style.backgroundSize =
+      ((this.zoomPercent - 5) * 100) / (100 - 5) + '% 100%';
+  }
+
   changePercent(e) {
     this.zoomPercent = Number(e.target.value);
     this.setZoom();
     this.input.nativeElement.style.backgroundSize =
       ((e.target.value - 5) * 100) / (100 - 5) + '% 100%';
   }
+
   scroll(e) {
-    if (e.deltaY < 0) {
+    if (e < 0 || e.deltaY < 0) {
       if (this.zoomPercent < 96) {
         this.zoomPercent = this.zoomPercent + 4;
         this.setZoom();
@@ -156,8 +146,6 @@ export class OrganizationDiagramComponent implements OnInit {
     }
   }
   setZoom() {
-    // this.element.style.zoom = this.zoomPercent * 2 + '%';
-    // this.element.style.transform = `scale(${(this.zoomPercent * 2) / 100})`;
     this.element.style.transform = `scale(${
       (this.zoomPercent * 2) / 100
     }) translateX(-50%)`;

@@ -58,93 +58,91 @@ export class OrganizationNodeComponent implements OnInit {
     this.data.changeCollapse('');
   }
 
-  /**
-   * Chuyển đổi đơn vị
-   * createdby ntdung5 28.06.2022
-   */
-  get convertUnit() {
-    let offset = this.relativeOffset;
-    if (offset.code != 'none') {
-      let unit = 220;
-      let result;
-      switch (offset.code) {
-        case 'prev':
-          if (offset.child % 2 == 0) {
-            result = { right: (offset.child / 2 - 0.5) * unit + 'px' };
-          } else {
-            result = { right: Math.floor(offset.child / 2) * unit + 'px' };
-          }
-          break;
-        case 'next':
-          if (offset.child % 2 == 0) {
-            result = { left: (offset.child / 2 - 0.5) * unit + 'px' };
-          } else {
-            result = { left: Math.floor(offset.child / 2) * unit + 'px' };
-          }
-          break;
-        default:
-          result = null;
-          break;
-      }
-      this.nodeData.position = result;
-      if (result) {
-        if (this.siblings[this.index - 1] && result.left) {
-          this.siblings[this.index - 1].position = result;
-        }
-        if (this.siblings[this.index + 1] && result.right) {
-          this.siblings[this.index + 1].position = result;
-        }
-      }
-      return result;
-    } else {
-      return null;
-    }
-  }
+  // get bonusOffset() {
+  //   if (
+  //     this.siblings[this.index + 1] &&
+  //     this.siblings[this.index + 1].position &&
+  //     this.siblings[this.index + 1].position.left
+  //   ) {
+  //     this.nodeData.position = this.siblings[this.index + 1].position;
+  //     return this.nodeData.position;
+  //   } else if (
+  //     this.siblings[this.index - 1] &&
+  //     this.siblings[this.index - 1].position &&
+  //     this.siblings[this.index - 1].position.right
+  //   ) {
+  //     this.nodeData.position = this.siblings[this.index - 1].position;
+  //     return this.nodeData.position;
+  //   }
+  //   return null;
+  // }
 
-  /**
-   * Là vị trí tương đối - Cho phép các node sát nhau hơn
-   * createdby ntdung5 27.06.2022
-   */
-  get relativeOffset() {
-    if (
-      !this.nodeData.children ||
-      this.nodeData.children.length == 0 ||
-      this.nodeData.collapse
-    ) {
-      let prevNode = this.siblings[this.index - 1];
-      let nextNode = this.siblings[this.index + 1];
-      if (
-        prevNode &&
-        prevNode.children &&
-        prevNode.children.length &&
-        !prevNode.collapse
-      ) {
-        return { code: 'prev', child: prevNode.children.length };
-      }
-      if (
-        nextNode &&
-        nextNode.children &&
-        nextNode.children.length &&
-        !nextNode.collapse
-      ) {
-        return { code: 'next', child: nextNode.children.length };
-      }
-      return { code: 'none' };
-    } else {
-      return { code: 'none' };
-    }
-  }
+  // /**
+  //  * Là vị trí tương đối - Cho phép các node sát nhau hơn
+  //  * createdby ntdung5 27.06.2022
+  //  */
+  // get relativeOffset() {
+  //   let unit = 220;
+  //   let result;
+  //   if (
+  //     !this.nodeData.children ||
+  //     this.nodeData.children.length == 0 ||
+  //     this.nodeData.collapse
+  //   ) {
+  //     let prevNode = this.siblings[this.index - 1];
+  //     let nextNode = this.siblings[this.index + 1];
+  //     if (
+  //       prevNode &&
+  //       prevNode.children &&
+  //       prevNode.children.length &&
+  //       !prevNode.collapse
+  //     ) {
+  //       if (prevNode.children.length % 2 == 0) {
+  //         result = {
+  //           right: (prevNode.children.length / 2 - 0.5) * unit + 'px',
+  //         };
+  //       } else {
+  //         result = {
+  //           right: Math.floor(prevNode.children.length / 2) * unit + 'px',
+  //         };
+  //       }
+  //     }
+  //     if (
+  //       nextNode &&
+  //       nextNode.children &&
+  //       nextNode.children.length &&
+  //       !nextNode.collapse
+  //     ) {
+  //       if (nextNode.children.length.child % 2 == 0) {
+  //         result = {
+  //           left: (nextNode.children.length / 2 - 0.5) * unit + 'px',
+  //         };
+  //       } else {
+  //         result = {
+  //           left: Math.floor(nextNode.children.length / 2) * unit + 'px',
+  //         };
+  //       }
+  //     }
+  //   }
+  //   return result;
+  // }
 
-  styleHiddenLine() {
-    let convertUnit = this.convertUnit;
-    if (convertUnit) {
-      if (convertUnit.left) {
-        return { width: `calc(50% + ${convertUnit.left})` };
-      }
-      if (convertUnit.right) {
-        return { width: `calc(50% + ${convertUnit.right})` };
-      }
-    }
-    return {};
-  }
+  // styleHiddenLine() {
+  //   let relativeOffset = this.relativeOffset;
+  //   if (relativeOffset) {
+  //     if (relativeOffset.left) {
+  //       return {
+  //         width: `calc(50% + ${relativeOffset.left})`,
+  //         left: `calc(-1px + ${relativeOffset.left})`,
+  //       };
+  //     }
+  //     if (relativeOffset.right) {
+  //       return {
+  //         width: `calc(50% + ${relativeOffset.right})`,
+  //         right: `calc(-1px + -${relativeOffset.right})`,
+  //       };
+  //     }
+  //   }
+  //   return {};
+  // }
 }

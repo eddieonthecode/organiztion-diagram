@@ -14,15 +14,8 @@ $lineColor: #000;
     flex-direction: column;
     justify-content: space-between;
     background-color: #fff;
-    &__head-line {
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-      height: 4px;
-      top: -8px;
-      left: -11px;
-      width: 200px;
-    }
-    &:not(.one)::before {
+    z-index: 10;
+    &::before {
       display: block;
       content: '';
       height: 4px;
@@ -35,8 +28,9 @@ $lineColor: #000;
     }
 
     // Color
-    &.one &__head-line {
+    &.one::before {
       background-color: #2566e9;
+      top: -2px;
     }
     &.two::before {
       background-color: #fd6f96;
@@ -102,7 +96,6 @@ $lineColor: #000;
     }
   }
   &__children {
-    // transition: all 1s ease;
     min-width: 100%;
     &::before {
       display: block;
