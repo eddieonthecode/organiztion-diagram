@@ -63,6 +63,11 @@ $lineColor: #000;
   &__name {
     font-size: 14px;
     font-weight: bold;
+    &:hover {
+      color: #2566e9;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
   &__manager {
     &-name {

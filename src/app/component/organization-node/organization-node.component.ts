@@ -20,8 +20,8 @@ export class OrganizationNodeComponent implements OnInit {
   @Input() siblings = [];
   @Input() index: number;
   @Input() parentAbsolute: boolean = false;
+  @Input() zoomPercent: any;
   constructor(private data: DataService, private cd: ChangeDetectorRef) {}
-
   ngOnInit() {}
 
   /**
@@ -54,8 +54,19 @@ export class OrganizationNodeComponent implements OnInit {
   }
 
   toggleCollapse() {
-    this.nodeData.collapse = !this.nodeData.collapse;
-    this.data.changeCollapse('');
+    this.nodeData.extend = !this.nodeData.extend;
+  }
+
+  mouseenterMore(e) {
+    this.data.changeCollapse({
+      show: true,
+      managers: this.nodeData.managers.slice(3),
+      event: e,
+    });
+  }
+
+  mouseleaveMore(e) {
+    this.data.changeCollapse({ show: false, managers: [], event: e });
   }
 
   // get bonusOffset() {
@@ -87,7 +98,7 @@ export class OrganizationNodeComponent implements OnInit {
   //   if (
   //     !this.nodeData.children ||
   //     this.nodeData.children.length == 0 ||
-  //     this.nodeData.collapse
+  //     this.nodeData.extend
   //   ) {
   //     let prevNode = this.siblings[this.index - 1];
   //     let nextNode = this.siblings[this.index + 1];
@@ -95,7 +106,7 @@ export class OrganizationNodeComponent implements OnInit {
   //       prevNode &&
   //       prevNode.children &&
   //       prevNode.children.length &&
-  //       !prevNode.collapse
+  //       !prevNode.extend
   //     ) {
   //       if (prevNode.children.length % 2 == 0) {
   //         result = {
@@ -111,7 +122,7 @@ export class OrganizationNodeComponent implements OnInit {
   //       nextNode &&
   //       nextNode.children &&
   //       nextNode.children.length &&
-  //       !nextNode.collapse
+  //       !nextNode.extend
   //     ) {
   //       if (nextNode.children.length.child % 2 == 0) {
   //         result = {

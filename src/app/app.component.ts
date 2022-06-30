@@ -16,6 +16,7 @@ export class AppComponent {
           'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
       },
     ],
+    extend: true,
     children: [
       {
         name: 'Khối sản xuất',
@@ -29,6 +30,36 @@ export class AppComponent {
             name: 'Nguyễn Phương Thảo',
             avatar:
               'https://cdn.oneesports.vn/cdn-data/sites/4/2022/02/hinh-nen-Luffy-2K-chat-ngau.jpg',
+          },
+          {
+            name: 'Nguyễn Tiến Dũng',
+            avatar:
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+          },
+          {
+            name: 'Nguyễn Phương Thảo',
+            avatar:
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+          },
+          {
+            name: 'Nguyễn Tiến Dũng',
+            avatar:
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+          },
+          {
+            name: 'Nguyễn Tiến Dũng',
+            avatar:
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+          },
+          {
+            name: 'Nguyễn Phương Thảo',
+            avatar:
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
+          },
+          {
+            name: 'Nguyễn Tiến Dũng',
+            avatar:
+              'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
           },
         ],
         children: [

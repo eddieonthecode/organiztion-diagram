@@ -68,29 +68,12 @@
                 more
                 position-relative
               "
+              (mouseenter)="mouseenterMore($event)"
+              (mouseleave)="mouseleaveMore($event)"
               [style.z-index]="100 - level"
             >
               <div class="d-flex flex-center">+</div>
               {{ nodeData.managers.length - 3 }}
-              <div
-                class="organization__manager-more position-absolute"
-                [style.z-index]="100 - level"
-              >
-                <div
-                  *ngFor="let manager of nodeData.managers.slice(3)"
-                  class="organization__manager-more__item d-flex"
-                >
-                  <div class="organization__manager-item">
-                    <img [src]="manager.avatar" [alt]="manager.name" />
-                  </div>
-                  <div
-                    [title]="manager.name"
-                    class="organization__manager-name text-nowrap"
-                  >
-                    {{ manager.name }}
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -107,27 +90,26 @@
     <!-- Nút extend/collapse nhánh -->
     <div
       class="organization__togglechild position-absolute d-flex flex-center"
-      [class.plus]="nodeData.collapse"
-      [class.minus]="!nodeData.collapse"
+      [class.plus]="!nodeData.extend"
+      [class.minus]="nodeData.extend"
       (click)="toggleCollapse()"
       *ngIf="nodeData.children && nodeData.children.length"
     >
-      <i *ngIf="nodeData.collapse" class="fa-solid fa-plus"></i>
-      <i *ngIf="!nodeData.collapse" class="fa-solid fa-minus"></i>
+      <i *ngIf="!nodeData.extend" class="fa-solid fa-plus"></i>
+      <i *ngIf="nodeData.extend" class="fa-solid fa-minus"></i>
     </div>
     <div *ngIf="level != 1" class="organization__line-top"></div>
     <div
-      *ngIf="
-        nodeData.children && nodeData.children.length && !nodeData.collapse
-      "
+      *ngIf="nodeData.children && nodeData.children.length && nodeData.extend"
       class="organization__line-bottom"
     ></div>
   </div>
   <!-- Các nhánh con -->
+  <!-- [style.height]="nodeData.extend ? 'unset' : 0"
+  [style.width]="nodeData.extend ? 'unset' : 0"
+  [style.opacity]="nodeData.extend ? 1 : 0" -->
   <div
-    [style.height]="!nodeData.collapse ? 'unset' : 0"
-    [style.width]="!nodeData.collapse ? 'unset' : 0"
-    [style.opacity]="!nodeData.collapse ? 1 : 0"
+    [style.display]="nodeData.extend ? 'flex' : 'none !important'"
     class="organization__children position-relative d-flex m-t-40"
   >
     <!-- Ẩn đường thừa -->

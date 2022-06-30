@@ -20,14 +20,24 @@ export class OrganizationDiagramComponent implements OnInit {
   zoomPercent = 50;
   xPercent = 50;
   element: any;
+  tempOrg: any;
+  managersPosition = {};
+  managers = [];
+  showManager = false;
+
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.data.currentMessage.subscribe(() => {
-      // this.element.style.transformOrigin = 'center';
-      // setTimeout(() => {
-      //   this.element.style.transformOrigin = '50% 0';
-      // }, 0);
+    this.data.currentMessage.subscribe((param) => {
+      this.managers = param.managers || [];
+      if (param.event) {
+        let size = param.event.target.getBoundingClientRect();
+        this.managersPosition = {
+          top: size.bottom + 'px',
+          left: size.left + 'px',
+        };
+      }
+      this.showManager = param.show || false;
     });
 
     this.element = this.draggable.nativeElement;
@@ -60,6 +70,10 @@ export class OrganizationDiagramComponent implements OnInit {
     });
   }
 
+  /**
+   * Kiểm tra trình duyệt hiện tại là trình duyệt nào
+   * createdby ntdung5 30.06.2022
+   */
   detectBrowser() {
     // Opera 8.0+
     var isOpera =
@@ -106,6 +120,7 @@ export class OrganizationDiagramComponent implements OnInit {
       isBlink,
     };
   }
+
   /**
    * Sự kiện ấn chuột xuống
    * createdby ntdung5 13.06.2022
@@ -129,11 +144,13 @@ export class OrganizationDiagramComponent implements OnInit {
         100;
     // }
   }
-  mousedownControl(e) {
-    e.stopPropagation();
-  }
+
+  /**
+   * Về lại vị trí ban đầu
+   * createdby ntdung5 30.06.2022
+   */
   recenter() {
-    this.element.style.top = '20px';
+    this.element.style.top = '5%';
     this.zoomPercent = 50;
     this.setZoom();
     this.input.nativeElement.style.backgroundSize =
@@ -148,36 +165,76 @@ export class OrganizationDiagramComponent implements OnInit {
     this.element.style.left = '50%';
   }
 
+  /**
+   * Thay đổi giá trị phần trăm
+   * createdby ntdung5 30.06.20223
+   */
   changePercent(e) {
+    this.convertPXToPercent();
     this.zoomPercent = Number(e.target.value);
     this.setZoom();
     this.input.nativeElement.style.backgroundSize =
       ((e.target.value - 5) * 100) / (100 - 5) + '% 100%';
   }
 
+  /**
+   * Bắt sự kiện cuộn chuột
+   * createdby ntdung5 30.06.2022
+   */
   scroll(e) {
+    this.convertPXToPercent();
     if (e < 0 || e.deltaY < 0) {
-      if (this.zoomPercent < 96) {
-        this.zoomPercent = this.zoomPercent + 4;
-        this.setZoom();
-        this.input.nativeElement.style.backgroundSize =
-          ((this.zoomPercent - 5) * 100) / (100 - 5) + '% 100%';
+      if (this.zoomPercent < 95) {
+        this.zoomPercent = this.zoomPercent + 5;
+      } else {
+        this.zoomPercent = 100;
       }
     } else {
-      if (this.zoomPercent > 4) {
-        this.zoomPercent = this.zoomPercent - 4;
-        this.setZoom();
-        this.input.nativeElement.style.backgroundSize =
-          ((this.zoomPercent - 5) * 100) / (100 - 5) + '% 100%';
+      if (this.zoomPercent > 5) {
+        this.zoomPercent = this.zoomPercent - 5;
+      } else {
+        this.zoomPercent = 5;
       }
     }
+    this.setZoom();
+    this.input.nativeElement.style.backgroundSize =
+      ((this.zoomPercent - 5) * 100) / (100 - 5) + '% 100%';
   }
+
+  /**
+   * Đặt giá trị zoom hiện tại
+   * createdby ntdung5 30.06.2022
+   */
   setZoom() {
     this.element.style.zoom = this.zoomPercent * 2 + '%';
     // this.element.style.transform = `scale(${(this.zoomPercent * 2) / 100})`;
     // this.element.style.transform = `scale(${
     //   (this.zoomPercent * 2) / 100
     // }) translateX(-50%)`;
+  }
+
+  /**
+   * Chuyển pixel về phần trăm
+   * createdby ntdung5 30.06.2022
+   */
+  convertPXToPercent() {
+    if (
+      this.element.style.left.includes('px') ||
+      this.element.style.right.includes('px')
+    ) {
+      let percentX =
+        Number(
+          this.element.style.left.slice(0, this.element.style.left.length - 2)
+        ) / this.container.nativeElement.getBoundingClientRect().width;
+      let percentY =
+        Number(
+          this.element.style.top.slice(0, this.element.style.top.length - 2)
+        ) / this.container.nativeElement.getBoundingClientRect().height;
+      this.element.style.left =
+        ((percentX * 100 * this.zoomPercent * 2) / 100).toFixed(2) + '%';
+      this.element.style.top =
+        ((percentY * 100 * this.zoomPercent * 2) / 100).toFixed(2) + '%';
+    }
   }
 
   /**

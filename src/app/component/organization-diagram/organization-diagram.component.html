@@ -8,7 +8,7 @@
   >
     <div
       class="organization__control position-absolute"
-      (mousedown)="$event.stopPropagation(); mousedownControl($event)"
+      (mousedown)="$event.stopPropagation()"
     >
       <div class="organization__zoom d-flex p-y-4 p-x-10 align-items-center">
         <div
@@ -62,6 +62,24 @@
           >
             <i class="fa-solid fa-arrows-to-circle"></i>
           </div>
+        </div>
+      </div>
+    </div>
+    <div
+      [hidden]="!showManager"
+      class="organization__manager position-fixed"
+      [style]="managersPosition"
+      [style.zoom]="zoomPercent * 2 + '%'"
+    >
+      <div
+        *ngFor="let manager of managers"
+        class="organization__manager-item d-flex align-items-center"
+      >
+        <div class="organization__manager-avatar m-r-8 d-flex">
+          <img [src]="manager.avatar" [alt]="manager.name" />
+        </div>
+        <div [title]="manager.name" class="organization__manager-name">
+          {{ manager.name }}
         </div>
       </div>
     </div>
