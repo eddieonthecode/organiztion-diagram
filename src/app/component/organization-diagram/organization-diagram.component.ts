@@ -253,4 +253,27 @@ export class OrganizationDiagramComponent implements OnInit {
     //   document.selection.empty();
     // }
   }
+
+  list_to_tree(list, idField, parentIdField, parentIdDefault) {
+    var map = {},
+      node,
+      roots = [],
+      i;
+
+    for (i = 0; i < list.length; i += 1) {
+      map[list[i][idField]] = i; // initialize the map
+      list[i].children = []; // initialize the children
+    }
+
+    for (i = 0; i < list.length; i += 1) {
+      node = list[i];
+      if (node[parentIdField] !== parentIdDefault) {
+        // if you have dangling branches check that map[node.parentId] exists
+        list[map[node[parentIdField]]].children.push(node);
+      } else {
+        roots.push(node);
+      }
+    }
+    return roots;
+  }
 }
