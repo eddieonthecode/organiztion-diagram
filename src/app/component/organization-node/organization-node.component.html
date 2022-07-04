@@ -111,7 +111,7 @@
   <div class="organization__children position-relative d-flex m-t-40">
     <!-- Ẩn đường thừa -->
     <div
-      *ngIf="first || last"
+      *ngIf="(first || last) && nodeData.extend"
       class="organization__hidden-line position-absolute"
       [style]="styleHiddenLine"
       [class.first]="first"
