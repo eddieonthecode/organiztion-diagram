@@ -61,7 +61,7 @@ export class OrganizationNodeComponent implements OnInit {
   }
 
   mouseenterMore(e) {
-    this.data.changeCollapse({
+    this.data.hoverManagerHandler({
       show: true,
       managers: this.nodeData.managers.slice(3),
       event: e,
@@ -69,7 +69,7 @@ export class OrganizationNodeComponent implements OnInit {
   }
 
   mouseleaveMore(e) {
-    this.data.changeCollapse({ show: false, managers: [], event: e });
+    this.data.hoverManagerHandler({ show: false, managers: [], event: e });
   }
 
   get relativeOffset() {

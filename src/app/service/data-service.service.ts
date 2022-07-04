@@ -6,14 +6,14 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
-  messageSource = new BehaviorSubject<string>('default message');
-  currentMessage = this.messageSource.asObservable();
+  hoverManager = new BehaviorSubject<string>('default message');
+  hoverManagerObs = this.hoverManager.asObservable();
   // có thể subcribe theo dõi thay đổi value của biến này thay cho messageSource
 
   constructor() {}
 
   // method này để change source message
-  changeCollapse(message) {
-    this.messageSource.next(message);
+  hoverManagerHandler(message) {
+    this.hoverManager.next(message);
   }
 }

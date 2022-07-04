@@ -28,7 +28,7 @@ export class OrganizationDiagramComponent implements OnInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
-    this.data.currentMessage.subscribe((param) => {
+    this.data.hoverManagerObs.subscribe((param) => {
       this.managers = param.managers || [];
       if (param.event) {
         let size = param.event.target.getBoundingClientRect();
