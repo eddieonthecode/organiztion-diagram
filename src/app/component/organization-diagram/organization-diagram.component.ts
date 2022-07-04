@@ -40,6 +40,10 @@ export class OrganizationDiagramComponent implements OnInit {
       this.showManager = param.show || false;
     });
 
+    this.data.hoverManagerObs.subscribe((param) => {
+      console.log(param);
+    });
+
     this.element = this.draggable.nativeElement;
     this.recenter();
     // Sự kiện di chuột khắp màn hình

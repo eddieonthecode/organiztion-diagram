@@ -58,6 +58,7 @@ export class OrganizationNodeComponent implements OnInit {
     this.siblings.forEach((sib) => {
       sib.position = null;
     });
+    this.data.changeCollapseHandler(this.nodeData.extend);
   }
 
   mouseenterMore(e) {
