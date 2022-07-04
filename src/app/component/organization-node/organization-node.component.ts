@@ -103,20 +103,36 @@ export class OrganizationNodeComponent implements OnInit {
       }
     }
     if (result['right']) {
-      result['right'] += 'px';
       for (let i = this.index + 1; i < this.siblings.length; i++) {
         if (this.isSingle(this.siblings[i])) {
-          this.siblings[i].position = { right: result['right'] };
+          this.siblings[i].position = { right: result['right'] + 'px' };
+        } else {
+          let childrenDistance = this.childrenDistance(this.siblings[i]);
+          if (result['right'] > childrenDistance * 220) {
+            this.siblings[i].position =
+              result['right'] - childrenDistance * 220 + 'px';
+          } else {
+            this.siblings[i].position = { right: result['right'] + 'px' };
+          }
         }
       }
+      result['right'] += 'px';
     }
     if (result['left']) {
-      result['left'] += 'px';
       for (let i = 0; i < this.index; i++) {
         if (this.isSingle(this.siblings[i])) {
-          this.siblings[i].position = { left: result['left'] };
+          this.siblings[i].position = { left: result['left'] + 'px' };
+        } else {
+          let childrenDistance = this.childrenDistance(this.siblings[i]);
+          if (result['left'] > childrenDistance * 220) {
+            this.siblings[i].position =
+              result['left'] - childrenDistance * 220 + 'px';
+          } else {
+            this.siblings[i].position = { right: result['left'] + 'px' };
+          }
         }
       }
+      result['left'] += 'px';
     }
     if (this.isEmpty(result)) {
       result = null;
@@ -131,9 +147,9 @@ export class OrganizationNodeComponent implements OnInit {
   childrenDistance(nodeData) {
     let result;
     if (nodeData.children.length % 2 == 0) {
-      result = this.siblings[this.index + 1].children.length / 2 - 0.5;
+      result = nodeData.children.length / 2 - 0.5;
     } else {
-      result = Math.floor(this.siblings[this.index + 1].children.length / 2);
+      result = Math.floor(nodeData.children.length / 2);
     }
     return result;
   }
@@ -153,91 +169,21 @@ export class OrganizationNodeComponent implements OnInit {
     return true;
   }
 
-  // get bonusOffset() {
-  //   if (
-  //     this.siblings[this.index + 1] &&
-  //     this.siblings[this.index + 1].position &&
-  //     this.siblings[this.index + 1].position.left
-  //   ) {
-  //     this.nodeData.position = this.siblings[this.index + 1].position;
-  //     return this.nodeData.position;
-  //   } else if (
-  //     this.siblings[this.index - 1] &&
-  //     this.siblings[this.index - 1].position &&
-  //     this.siblings[this.index - 1].position.right
-  //   ) {
-  //     this.nodeData.position = this.siblings[this.index - 1].position;
-  //     return this.nodeData.position;
-  //   }
-  //   return null;
-  // }
-
-  // /**
-  //  * Là vị trí tương đối - Cho phép các node sát nhau hơn
-  //  * createdby ntdung5 27.06.2022
-  //  */
-  // get relativeOffset() {
-  //   let unit = 220;
-  //   let result;
-  //   if (
-  //     !this.nodeData.children ||
-  //     this.nodeData.children.length == 0 ||
-  //     this.nodeData.extend
-  //   ) {
-  //     let prevNode = this.siblings[this.index - 1];
-  //     let nextNode = this.siblings[this.index + 1];
-  //     if (
-  //       prevNode &&
-  //       prevNode.children &&
-  //       prevNode.children.length &&
-  //       !prevNode.extend
-  //     ) {
-  //       if (prevNode.children.length % 2 == 0) {
-  //         result = {
-  //           right: (prevNode.children.length / 2 - 0.5) * unit + 'px',
-  //         };
-  //       } else {
-  //         result = {
-  //           right: Math.floor(prevNode.children.length / 2) * unit + 'px',
-  //         };
-  //       }
-  //     }
-  //     if (
-  //       nextNode &&
-  //       nextNode.children &&
-  //       nextNode.children.length &&
-  //       !nextNode.extend
-  //     ) {
-  //       if (nextNode.children.length.child % 2 == 0) {
-  //         result = {
-  //           left: (nextNode.children.length / 2 - 0.5) * unit + 'px',
-  //         };
-  //       } else {
-  //         result = {
-  //           left: Math.floor(nextNode.children.length / 2) * unit + 'px',
-  //         };
-  //       }
-  //     }
-  //   }
-  //   return result;
-  // }
-
-  // styleHiddenLine() {
-  //   let relativeOffset = this.relativeOffset;
-  //   if (relativeOffset) {
-  //     if (relativeOffset.left) {
-  //       return {
-  //         width: `calc(50% + ${relativeOffset.left})`,
-  //         left: `calc(-1px + ${relativeOffset.left})`,
-  //       };
-  //     }
-  //     if (relativeOffset.right) {
-  //       return {
-  //         width: `calc(50% + ${relativeOffset.right})`,
-  //         right: `calc(-1px + -${relativeOffset.right})`,
-  //       };
-  //     }
-  //   }
-  //   return {};
-  // }
+  get styleHiddenLine() {
+    if (this.relativeOffset) {
+      if (this.relativeOffset['left']) {
+        return {
+          width: `calc(${this.relativeOffset['left']})`,
+          left: `calc(-1px - ${this.relativeOffset['left']} + 50%)`,
+        };
+      }
+      if (this.relativeOffset['right']) {
+        return {
+          width: `calc(${this.relativeOffset['right']})`,
+          right: `calc(-1px + ${this.relativeOffset['right']} - 50%)`,
+        };
+      }
+    }
+    return {};
+  }
 }
