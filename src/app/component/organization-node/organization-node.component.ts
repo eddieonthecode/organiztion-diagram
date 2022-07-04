@@ -55,6 +55,9 @@ export class OrganizationNodeComponent implements OnInit {
 
   toggleCollapse() {
     this.nodeData.extend = !this.nodeData.extend;
+    this.siblings.forEach((sib) => {
+      sib.position = null;
+    });
   }
 
   mouseenterMore(e) {
@@ -73,62 +76,81 @@ export class OrganizationNodeComponent implements OnInit {
     let result = {};
     let unit = 220;
     if (this.isSingle(this.nodeData)) {
+      // Xét điều kiện căn về trái
       if (
         this.siblings[this.index - 1] &&
         !this.isSingle(this.siblings[this.index - 1])
       ) {
-        if (this.siblings[this.index - 1].children.length % 2 == 0) {
-          if (!result['right']) {
-            result['right'] = 0;
-          }
-          result['right'] +=
-            (this.siblings[this.index - 1].children.length / 2 - 0.5) * unit;
-        } else {
-          if (!result['right']) {
-            result['right'] = 0;
-          }
-          result['right'] +=
-            Math.floor(this.siblings[this.index - 1].children.length / 2) *
-            unit;
+        if (!result['right']) {
+          result['right'] = 0;
         }
+        result['right'] +=
+          this.childrenDistance(this.siblings[this.index - 1]) * unit;
       }
-      if (
-        this.siblings[this.index + 1] &&
-        !this.isSingle(this.siblings[this.index + 1])
-      ) {
-        if (this.siblings[this.index + 1].children.length % 2 == 0) {
+
+      // Nếu đã căn về phải thì thôi không căn về trái
+      if (!result['right']) {
+        if (
+          this.siblings[this.index + 1] &&
+          !this.isSingle(this.siblings[this.index + 1])
+        ) {
           if (!result['left']) {
             result['left'] = 0;
           }
           result['left'] +=
-            (this.siblings[this.index + 1].children.length / 2 - 0.5) * unit;
-        } else {
-          if (!result['left']) {
-            result['left'] = 0;
-          }
-          result['left'] +=
-            Math.floor(this.siblings[this.index + 1].children.length / 2) *
-            unit;
+            this.childrenDistance(this.siblings[this.index + 1]) * unit;
         }
       }
     }
     if (result['right']) {
       result['right'] += 'px';
       for (let i = this.index + 1; i < this.siblings.length; i++) {
-        this.siblings[i].position = { right: result['right'] };
+        if (this.isSingle(this.siblings[i])) {
+          this.siblings[i].position = { right: result['right'] };
+        }
       }
     }
     if (result['left']) {
       result['left'] += 'px';
       for (let i = 0; i < this.index; i++) {
-        this.siblings[i].position = { left: result['left'] };
+        if (this.isSingle(this.siblings[i])) {
+          this.siblings[i].position = { left: result['left'] };
+        }
       }
+    }
+    if (this.isEmpty(result)) {
+      result = null;
     }
     return result;
   }
 
+  /**
+   * Khoảng xòe ra của một nút (Được tính theo số lượng nút con)
+   * createdby ntdung5 04.07.2022
+   */
+  childrenDistance(nodeData) {
+    let result;
+    if (nodeData.children.length % 2 == 0) {
+      result = this.siblings[this.index + 1].children.length / 2 - 0.5;
+    } else {
+      result = Math.floor(this.siblings[this.index + 1].children.length / 2);
+    }
+    return result;
+  }
+
+  /**
+   * Là nút đang ẩn children hoặc không có children
+   * createdby ntdung5 04.07.2022
+   */
   isSingle(nodeData) {
     return !nodeData.children || !nodeData.children.length || !nodeData.extend;
+  }
+
+  isEmpty(object) {
+    for (const property in object) {
+      return false;
+    }
+    return true;
   }
 
   // get bonusOffset() {
