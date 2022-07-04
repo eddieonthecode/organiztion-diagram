@@ -101,18 +101,20 @@ export class OrganizationNodeComponent implements OnInit {
       for (let i = 0; i < idxNotSingle; i++) {
         if (this.isSingle(this.nodeData.children[i])) {
           this.nodeData.children[i].position = {
-            left: this.childrenDistance(
-              this.nodeData.children[idxNotSingle] * 220 + 'px'
-            ),
+            left:
+              this.childrenDistance(this.nodeData.children[idxNotSingle]) *
+                220 +
+              'px',
           };
         }
       }
       for (let i = idxNotSingle + 1; i < this.nodeData.children.length; i++) {
         if (this.isSingle(this.nodeData.children[i])) {
           this.nodeData.children[i].position = {
-            right: this.childrenDistance(
-              this.nodeData.children[idxNotSingle] * 220 + 'px'
-            ),
+            right:
+              this.childrenDistance(this.nodeData.children[idxNotSingle]) *
+                220 +
+              'px',
           };
         }
       }
