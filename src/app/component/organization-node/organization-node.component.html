@@ -120,6 +120,7 @@
     <div [style.display]="nodeData.extend ? 'flex' : 'none !important'">
       <div *ngFor="let child of nodeData.children; let i = index">
         <app-organization-node
+          [rootData]="rootData"
           [nodeData]="child"
           [level]="level + 1"
           [first]="i == 0"

@@ -13,6 +13,16 @@ import { DataService } from '../../service/data-service.service';
   styleUrls: ['./organization-node.component.scss'],
 })
 export class OrganizationNodeComponent implements OnInit {
+  _rootData: any;
+  @Input() set rootData(value) {
+    if (this.nodeData) {
+      this.checkChildren();
+    }
+    this._rootData = value;
+  }
+  get rootData() {
+    return this._rootData;
+  }
   @Input() nodeData: any;
   @Input() level: number = 1;
   @Input() first: boolean = false;
@@ -21,8 +31,13 @@ export class OrganizationNodeComponent implements OnInit {
   @Input() index: number;
   @Input() parentAbsolute: boolean = false;
   @Input() zoomPercent: any;
+
   constructor(private data: DataService, private cd: ChangeDetectorRef) {}
   ngOnInit() {}
+
+  ngAfterViewInit() {
+    this.checkChildren();
+  }
 
   /**
    * Chuyển số level sang class ứng với nó
@@ -71,6 +86,37 @@ export class OrganizationNodeComponent implements OnInit {
 
   mouseleaveMore(e) {
     this.data.hoverManagerHandler({ show: false, managers: [], event: e });
+  }
+
+  checkChildren() {
+    let idxNotSingle = null;
+    if (this.nodeData.children && this.nodeData.children.length) {
+      this.nodeData.children.forEach((child, index) => {
+        if (!this.isSingle(child)) {
+          idxNotSingle = index;
+        }
+      });
+    }
+    if (idxNotSingle !== null) {
+      for (let i = 0; i < idxNotSingle; i++) {
+        if (this.isSingle(this.nodeData.children[i])) {
+          this.nodeData.children[i].position = {
+            left: this.childrenDistance(
+              this.nodeData.children[idxNotSingle] * 220 + 'px'
+            ),
+          };
+        }
+      }
+      for (let i = idxNotSingle + 1; i < this.nodeData.children.length; i++) {
+        if (this.isSingle(this.nodeData.children[i])) {
+          this.nodeData.children[i].position = {
+            right: this.childrenDistance(
+              this.nodeData.children[idxNotSingle] * 220 + 'px'
+            ),
+          };
+        }
+      }
+    }
   }
 
   get relativeOffset() {
