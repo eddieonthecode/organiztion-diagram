@@ -1,5 +1,7 @@
-<div class="d-flex flex-column align-items-center position-relative">
-  <!-- [style]="relativeOffset || nodeData.position" -->
+<div
+  class="d-flex flex-column align-items-center position-relative"
+  [style]="relativeOffset || nodeData.position"
+>
   <div [class]="numberToString(level)" class="organization__node m-x-10" #node>
     <div
       class="organization__name text-ellipsis-2"

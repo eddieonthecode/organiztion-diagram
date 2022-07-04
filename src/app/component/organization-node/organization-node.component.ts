@@ -69,6 +69,68 @@ export class OrganizationNodeComponent implements OnInit {
     this.data.changeCollapse({ show: false, managers: [], event: e });
   }
 
+  get relativeOffset() {
+    let result = {};
+    let unit = 220;
+    if (this.isSingle(this.nodeData)) {
+      if (
+        this.siblings[this.index - 1] &&
+        !this.isSingle(this.siblings[this.index - 1])
+      ) {
+        if (this.siblings[this.index - 1].children.length % 2 == 0) {
+          if (!result['right']) {
+            result['right'] = 0;
+          }
+          result['right'] +=
+            (this.siblings[this.index - 1].children.length / 2 - 0.5) * unit;
+        } else {
+          if (!result['right']) {
+            result['right'] = 0;
+          }
+          result['right'] +=
+            Math.floor(this.siblings[this.index - 1].children.length / 2) *
+            unit;
+        }
+      }
+      if (
+        this.siblings[this.index + 1] &&
+        !this.isSingle(this.siblings[this.index + 1])
+      ) {
+        if (this.siblings[this.index + 1].children.length % 2 == 0) {
+          if (!result['left']) {
+            result['left'] = 0;
+          }
+          result['left'] +=
+            (this.siblings[this.index + 1].children.length / 2 - 0.5) * unit;
+        } else {
+          if (!result['left']) {
+            result['left'] = 0;
+          }
+          result['left'] +=
+            Math.floor(this.siblings[this.index + 1].children.length / 2) *
+            unit;
+        }
+      }
+    }
+    if (result['right']) {
+      result['right'] += 'px';
+      for (let i = this.index + 1; i < this.siblings.length; i++) {
+        this.siblings[i].position = { right: result['right'] };
+      }
+    }
+    if (result['left']) {
+      result['left'] += 'px';
+      for (let i = 0; i < this.index; i++) {
+        this.siblings[i].position = { left: result['left'] };
+      }
+    }
+    return result;
+  }
+
+  isSingle(nodeData) {
+    return !nodeData.children || !nodeData.children.length || !nodeData.extend;
+  }
+
   // get bonusOffset() {
   //   if (
   //     this.siblings[this.index + 1] &&
