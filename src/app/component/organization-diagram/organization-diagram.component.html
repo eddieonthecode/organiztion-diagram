@@ -70,6 +70,8 @@
       class="organization__manager position-fixed"
       [style]="managersPosition"
       [style.zoom]="zoomPercent * 2 + '%'"
+      (mouseleave)="mouseleaveManagers($event)"
+      (mousedown)="$event.stopPropagation()"
     >
       <div
         *ngFor="let manager of managers"

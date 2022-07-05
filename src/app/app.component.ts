@@ -11,7 +11,7 @@ export class AppComponent {
     name: 'Công ty cổ phần HIPHOP quá tuyệt vời quá đỉnh quá xịn quá vip',
     managers: [
       {
-        name: 'Nguyễn Tiến Dũng',
+        name: 'Nguyễn Tiến Dũng Tên này rất là dài',
         avatar:
           'https://gamek.mediacdn.vn/133514250583805952/2020/5/31/anh-4-15909430232362015900333.png',
       },

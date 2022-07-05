@@ -24,13 +24,7 @@ export class OrganizationNodeComponent implements OnInit {
   @Output() changeCollapse = new EventEmitter<any>();
 
   constructor(private data: DataService, private cd: ChangeDetectorRef) {}
-  ngOnInit() {
-    this.data.changeCollapseLevelObs.subscribe((param) => {
-      if (param.level == this.level && param.index != this.index) {
-        this.checkChildren();
-      }
-    });
-  }
+  ngOnInit() {}
 
   /**
    * Chuyển số level sang class ứng với nó
@@ -91,10 +85,6 @@ export class OrganizationNodeComponent implements OnInit {
    */
   changeCollapseHandler() {
     this.checkChildren();
-    this.data.changeCollapseLevelHander({
-      level: this.level,
-      index: this.index,
-    });
   }
 
   /**
@@ -167,15 +157,6 @@ export class OrganizationNodeComponent implements OnInit {
         }
       }
     });
-
-    // Bonus được cộng dồn từ children
-    for (let i = 0; i < this.nodeData.children.length; i++) {
-      if (this.nodeData.children.position) {
-        if (this.nodeData.children.position['left']) {
-          this.nodeData.children.position['right'] = undefined;
-        }
-      }
-    }
     this.changeCollapse.emit();
   }
 
@@ -184,81 +165,6 @@ export class OrganizationNodeComponent implements OnInit {
    * createdby ntdung5 05.07.2022
    */
   bonusDistance() {}
-
-  // bonusPosition() {
-  //   let idxNotSingle = this.checkChildren;
-  //   if (idxNotSingle) {
-
-  //   }
-  // }
-
-  get relativeOffset() {
-    let result = {};
-    let unit = 220;
-    if (this.isSingle(this.nodeData)) {
-      // Xét điều kiện căn về trái
-      if (
-        this.siblings[this.index - 1] &&
-        !this.isSingle(this.siblings[this.index - 1])
-      ) {
-        if (!result['right']) {
-          result['right'] = 0;
-        }
-        result['right'] +=
-          this.childrenDistance(this.siblings[this.index - 1]) * unit;
-      }
-
-      // Nếu đã căn về phải thì thôi không căn về trái
-      if (!result['right']) {
-        if (
-          this.siblings[this.index + 1] &&
-          !this.isSingle(this.siblings[this.index + 1])
-        ) {
-          if (!result['left']) {
-            result['left'] = 0;
-          }
-          result['left'] +=
-            this.childrenDistance(this.siblings[this.index + 1]) * unit;
-        }
-      }
-    }
-    if (result['right']) {
-      for (let i = this.index + 1; i < this.siblings.length; i++) {
-        if (this.isSingle(this.siblings[i])) {
-          this.siblings[i].position = { right: result['right'] + 'px' };
-        } else {
-          let childrenDistance = this.childrenDistance(this.siblings[i]);
-          if (result['right'] > childrenDistance * 220) {
-            this.siblings[i].position =
-              result['right'] - childrenDistance * 220 + 'px';
-          } else {
-            this.siblings[i].position = { right: result['right'] + 'px' };
-          }
-        }
-      }
-      result['right'] += 'px';
-    }
-    if (!result['right'] && result['left']) {
-      for (let i = 0; i < this.index; i++) {
-        if (this.isSingle(this.siblings[i])) {
-          this.siblings[i].position = { left: result['left'] + 'px' };
-        } else {
-          let childrenDistance = this.childrenDistance(this.siblings[i]);
-          if (result['left'] > childrenDistance * 220) {
-            this.siblings[i].position =
-              result['left'] - childrenDistance * 220 + 'px';
-          } else {
-            this.siblings[i].position = { right: result['left'] + 'px' };
-          }
-        }
-      }
-      result['left'] += 'px';
-    }
-    if (this.isEmpty(result)) {
-      result = null;
-    }
-    return result;
-  }
 
   /**
    * Khoảng xòe ra của một nút (Được tính theo số lượng nút con)

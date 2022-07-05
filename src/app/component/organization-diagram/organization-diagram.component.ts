@@ -25,25 +25,36 @@ export class OrganizationDiagramComponent implements OnInit {
   managers = [];
   showManager = false;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.data.hoverManagerObs.subscribe((param) => {
+      if (param.show) {
+        this.managers = param.managers || [];
+        if (param.event) {
+          let size = param.event.target.getBoundingClientRect();
+          this.managersPosition = {
+            top: size.bottom + 'px',
+            left: size.left + 'px',
+          };
+        }
+        this.showManager = true;
+      } else {
+        if (
+          !(
+            param.event &&
+            param.event.relatedTarget &&
+            this.checkElementNestedByClass(
+              param.event.relatedTarget,
+              'organization__manager'
+            )
+          )
+        ) {
+          this.showManager = false;
+        }
+      }
+    });
+  }
 
   ngAfterViewInit() {
-    this.data.hoverManagerObs.subscribe((param) => {
-      this.managers = param.managers || [];
-      if (param.event) {
-        let size = param.event.target.getBoundingClientRect();
-        this.managersPosition = {
-          top: size.bottom + 'px',
-          left: size.left + 'px',
-        };
-      }
-      this.showManager = param.show || false;
-    });
-
-    this.data.hoverManagerObs.subscribe((param) => {
-      console.log(param);
-    });
-
     this.element = this.draggable.nativeElement;
     this.recenter();
     // Sự kiện di chuột khắp màn hình
@@ -194,10 +205,10 @@ export class OrganizationDiagramComponent implements OnInit {
         this.zoomPercent = 100;
       }
     } else {
-      if (this.zoomPercent > 5) {
+      if (this.zoomPercent > 10) {
         this.zoomPercent = this.zoomPercent - 5;
       } else {
-        this.zoomPercent = 5;
+        this.zoomPercent = 10;
       }
     }
     this.setZoom();
@@ -282,5 +293,36 @@ export class OrganizationDiagramComponent implements OnInit {
       }
     }
     return roots;
+  }
+  /**
+   * Kiểm tra element có thuộc một element cha có class cho trước hay không
+   * @param {Element} element
+   * @param {String} className
+   * CreatedBy: NTDUNG (30/11/2021)
+   */
+  checkElementNestedByClass(element, className) {
+    if (element && className) {
+      var parentE = element;
+      if (parentE) {
+        // Nếu không chứa class thì tiếp tục vòng lặp
+        while (parentE.classList.contains(className) == false) {
+          // Đi ra một element cha
+          parentE = parentE.parentElement;
+
+          // Khi đã duyệt hết mà không có thì set null và thoát vòng lặp
+          if (parentE.tagName == 'BODY') {
+            parentE = null;
+            break;
+          }
+        }
+      }
+      // Trả về kết quả
+      return parentE;
+    } else return null;
+  }
+  mouseleaveManagers(e) {
+    if (!this.checkElementNestedByClass(e.relatedTarget, 'more')) {
+      this.showManager = false;
+    }
   }
 }

@@ -1,11 +1,21 @@
 <div
   class="d-flex flex-column align-items-center position-relative"
   [style]="{
-    left: nodeData.position && nodeData.position.left + 'px',
-    right: nodeData.position && nodeData.position.right + 'px'
+    left:
+      nodeData.position && nodeData.position.left
+        ? nodeData.position.left + 'px'
+        : 'unset',
+    right:
+      nodeData.position && nodeData.position.right
+        ? nodeData.position.right + 'px'
+        : 'unset'
   }"
 >
-  <div [class]="numberToString(level)" class="organization__node m-x-10" #node>
+  <div
+    [class]="numberToString(level)"
+    class="organization__node m-x-10 w-100"
+    #node
+  >
     <div
       class="organization__name text-ellipsis-2"
       [title]="nodeData.name"
@@ -116,7 +126,7 @@
   <div class="organization__children position-relative d-flex m-t-40">
     <!-- Ẩn đường thừa -->
     <div
-      *ngIf="(first || last) && nodeData.extend"
+      *ngIf="first || last"
       class="organization__hidden-line position-absolute"
       [style]="styleHiddenLine"
       [class.first]="first"
@@ -131,6 +141,7 @@
           [last]="i == nodeData.children.length - 1"
           [siblings]="nodeData.children"
           [index]="i"
+          (changeCollapse)="changeCollapseHandler()"
         ></app-organization-node>
       </div>
     </div>
