@@ -13,16 +13,6 @@ import { DataService } from '../../service/data-service.service';
   styleUrls: ['./organization-node.component.scss'],
 })
 export class OrganizationNodeComponent implements OnInit {
-  _rootData: any;
-  @Input() set rootData(value) {
-    if (this.nodeData) {
-      this.checkChildren();
-    }
-    this._rootData = value;
-  }
-  get rootData() {
-    return this._rootData;
-  }
   @Input() nodeData: any;
   @Input() level: number = 1;
   @Input() first: boolean = false;
@@ -31,12 +21,15 @@ export class OrganizationNodeComponent implements OnInit {
   @Input() index: number;
   @Input() parentAbsolute: boolean = false;
   @Input() zoomPercent: any;
+  @Output() changeCollapse = new EventEmitter<any>();
 
   constructor(private data: DataService, private cd: ChangeDetectorRef) {}
-  ngOnInit() {}
-
-  ngAfterViewInit() {
-    this.checkChildren();
+  ngOnInit() {
+    this.data.changeCollapseLevelObs.subscribe((param) => {
+      if (param.level == this.level && param.index != this.index) {
+        this.checkChildren();
+      }
+    });
   }
 
   /**
@@ -68,14 +61,19 @@ export class OrganizationNodeComponent implements OnInit {
     }
   }
 
+  /**
+   * Đóng mở nút con
+   * createdby ntdung5 05.07.2022
+   */
   toggleCollapse() {
     this.nodeData.extend = !this.nodeData.extend;
-    this.siblings.forEach((sib) => {
-      sib.position = null;
-    });
-    this.data.changeCollapseHandler(this.nodeData.extend);
+    this.changeCollapse.emit();
   }
 
+  /**
+   * Sự kiện hover cho nút xem thêm quản lý cơ cấu
+   * createdby ntdung5 05.07.2022
+   */
   mouseenterMore(e) {
     this.data.hoverManagerHandler({
       show: true,
@@ -83,43 +81,116 @@ export class OrganizationNodeComponent implements OnInit {
       event: e,
     });
   }
-
   mouseleaveMore(e) {
     this.data.hoverManagerHandler({ show: false, managers: [], event: e });
   }
 
+  /**
+   * Xử lý khi thay đổi đóng mở
+   * createdby ntdung5 05.07.2022
+   */
+  changeCollapseHandler() {
+    this.checkChildren();
+    this.data.changeCollapseLevelHander({
+      level: this.level,
+      index: this.index,
+    });
+  }
+
+  /**
+   * Kiểm tra các nút con
+   * createdby ntdung5 05.07.2022
+   */
   checkChildren() {
-    let idxNotSingle = null;
+    let idxNotSingle = [];
+    let bonusLeft = 0;
+    let bonusRight = 0;
+
+    // Xóa vị trí cũ của các nút con
+    for (let i = 0; i < this.nodeData.children.length; i++) {
+      this.nodeData.children[i].position = null;
+    }
+
+    // Tìm ra tất cả những nút đang mở
     if (this.nodeData.children && this.nodeData.children.length) {
       this.nodeData.children.forEach((child, index) => {
         if (!this.isSingle(child)) {
-          idxNotSingle = index;
+          idxNotSingle.push(index);
         }
       });
     }
-    if (idxNotSingle !== null) {
-      for (let i = 0; i < idxNotSingle; i++) {
-        if (this.isSingle(this.nodeData.children[i])) {
-          this.nodeData.children[i].position = {
-            left:
-              this.childrenDistance(this.nodeData.children[idxNotSingle]) *
-                220 +
-              'px',
-          };
+    idxNotSingle.forEach((idx) => {
+      // Nếu nút ngay trước đang được đóng
+      if (
+        this.nodeData.children[idx - 1] &&
+        this.isSingle(this.nodeData.children[idx - 1])
+      ) {
+        // Cộng thêm vào bonusLeft của cha
+        bonusLeft += this.childrenDistance(this.nodeData.children[idx]) * 220;
+        // Gán position left cho toàn bộ các nút bên trái
+        for (let i = idx - 1; i >= 0; i--) {
+          if (this.isSingle(this.nodeData.children[i])) {
+            if (
+              !this.nodeData.children[i].position ||
+              !this.nodeData.children[i].position.left
+            ) {
+              this.nodeData.children[i].position = { left: 0 };
+            }
+            this.nodeData.children[i].position['left'] +=
+              this.childrenDistance(this.nodeData.children[idx]) * 220;
+          } else {
+            break;
+          }
         }
       }
-      for (let i = idxNotSingle + 1; i < this.nodeData.children.length; i++) {
-        if (this.isSingle(this.nodeData.children[i])) {
-          this.nodeData.children[i].position = {
-            right:
-              this.childrenDistance(this.nodeData.children[idxNotSingle]) *
-                220 +
-              'px',
-          };
+      // Nếu nút ngay sau đang đóng
+      if (
+        this.nodeData.children[idx + 1] &&
+        this.isSingle(this.nodeData.children[idx + 1])
+      ) {
+        // Cộng thêm bonusRight của cha
+        bonusRight += this.childrenDistance(this.nodeData.children[idx]) * 220;
+        // Gán position right cho toàn bộ các nút bên phải
+        for (let i = idx + 1; i < this.nodeData.children.length; i++) {
+          if (this.isSingle(this.nodeData.children[i])) {
+            if (
+              !this.nodeData.children[i].position ||
+              !this.nodeData.children[i].position['right']
+            ) {
+              this.nodeData.children[i].position = { right: 0 };
+            }
+            this.nodeData.children[i].position['right'] +=
+              this.childrenDistance(this.nodeData.children[idx]) * 220;
+          } else {
+            break;
+          }
+        }
+      }
+    });
+
+    // Bonus được cộng dồn từ children
+    for (let i = 0; i < this.nodeData.children.length; i++) {
+      if (this.nodeData.children.position) {
+        if (this.nodeData.children.position['left']) {
+          this.nodeData.children.position['right'] = undefined;
         }
       }
     }
+    this.changeCollapse.emit();
   }
+
+  /**
+   * Khoảng cách cộng thêm (Được tính từ độ co vào của các nút con)
+   * createdby ntdung5 05.07.2022
+   */
+  bonusDistance() {}
+
+  // bonusPosition() {
+  //   let idxNotSingle = this.checkChildren;
+  //   if (idxNotSingle) {
+
+  //   }
+  // }
 
   get relativeOffset() {
     let result = {};
@@ -167,7 +238,7 @@ export class OrganizationNodeComponent implements OnInit {
       }
       result['right'] += 'px';
     }
-    if (result['left']) {
+    if (!result['right'] && result['left']) {
       for (let i = 0; i < this.index; i++) {
         if (this.isSingle(this.siblings[i])) {
           this.siblings[i].position = { left: result['left'] + 'px' };
@@ -219,18 +290,32 @@ export class OrganizationNodeComponent implements OnInit {
   }
 
   get styleHiddenLine() {
-    if (this.relativeOffset) {
-      if (this.relativeOffset['left']) {
-        return {
-          width: `calc(${this.relativeOffset['left']})`,
-          left: `calc(-1px - ${this.relativeOffset['left']} + 50%)`,
-        };
+    if (this.nodeData.position) {
+      if (this.nodeData.position['left']) {
+        if (this.nodeData.extend) {
+          return {
+            width: `calc(${this.nodeData.position['left']}px)`,
+            // left: `calc(-1px - ${this.nodeData.position['left']} + 50%)`,
+          };
+        } else {
+          return {
+            width: `calc(${this.nodeData.position['left']}px + 50%)`,
+            left: `calc(1px - ${this.nodeData.position['left']}px)`,
+          };
+        }
       }
-      if (this.relativeOffset['right']) {
-        return {
-          width: `calc(${this.relativeOffset['right']})`,
-          right: `calc(-1px + ${this.relativeOffset['right']} - 50%)`,
-        };
+      if (this.nodeData.position['right']) {
+        if (this.nodeData.extend) {
+          return {
+            width: `calc(${this.nodeData.position['right']}px)`,
+            left: `calc(-1px - ${this.nodeData.position['right']}px + 50%)`,
+          };
+        } else {
+          return {
+            width: `calc(${this.nodeData.position['right']}px + 50%)`,
+            right: `calc(-1px - ${this.nodeData.position['right']}px)`,
+          };
+        }
       }
     }
     return {};

@@ -1,5 +1,10 @@
-<div class="d-flex flex-column align-items-center position-relative">
-  <!-- [style]="relativeOffset || nodeData.position" -->
+<div
+  class="d-flex flex-column align-items-center position-relative"
+  [style]="{
+    left: nodeData.position && nodeData.position.left + 'px',
+    right: nodeData.position && nodeData.position.right + 'px'
+  }"
+>
   <div [class]="numberToString(level)" class="organization__node m-x-10" #node>
     <div
       class="organization__name text-ellipsis-2"
@@ -120,7 +125,6 @@
     <div [style.display]="nodeData.extend ? 'flex' : 'none !important'">
       <div *ngFor="let child of nodeData.children; let i = index">
         <app-organization-node
-          [rootData]="rootData"
           [nodeData]="child"
           [level]="level + 1"
           [first]="i == 0"

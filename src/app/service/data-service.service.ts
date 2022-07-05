@@ -12,6 +12,9 @@ export class DataService {
   changeCollapse = new BehaviorSubject<any>('');
   changeCollapseObs = this.changeCollapse.asObservable();
 
+  changeCollapseLevel = new BehaviorSubject<any>('');
+  changeCollapseLevelObs = this.changeCollapseLevel.asObservable();
+
   constructor() {}
 
   hoverManagerHandler(message) {
@@ -20,5 +23,9 @@ export class DataService {
 
   changeCollapseHandler(param) {
     this.changeCollapse.next(param);
+  }
+
+  changeCollapseLevelHander(param) {
+    this.changeCollapseLevel.next(param);
   }
 }
