@@ -287,7 +287,11 @@ export class OrganizationDiagramComponent implements OnInit {
       node = list[i];
       if (node[parentIdField] !== parentIdDefault) {
         // if you have dangling branches check that map[node.parentId] exists
-        list[map[node[parentIdField]]].children.push(node);
+        if (list[map[node[parentIdField]]]) {
+          list[map[node[parentIdField]]].children.push(node);
+        } else {
+          roots.push(node);
+        }
       } else {
         roots.push(node);
       }
