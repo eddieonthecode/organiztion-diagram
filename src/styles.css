@@ -1,1 +1,8 @@
 /* Add application styles & imports to this file! */
+:root {
+  --primaryColor: yellow;
+}
+
+[theme='employee'] {
+  --primaryColor: pink;
+}
