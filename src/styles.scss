@@ -4,5 +4,7 @@
 }
 
 [theme='employee'] {
-  --primaryColor: pink;
+  :root {
+    --primaryColor: pink;
+  }
 }
